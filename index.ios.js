@@ -79,11 +79,9 @@ var styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
-    backgroundColor: '#F5FCFF',
   },
   listView: {
     paddingTop: 20,
-    backgroundColor: '#F5FCFF',
   },
   item: {
     height: 50,
