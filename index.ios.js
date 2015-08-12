@@ -35,7 +35,8 @@ var ReactNativeV2ex = React.createClass({
             loaded: true
           };
         });
-      });
+      })
+      .done();
   },
   render () {
     if (!this.state.loaded) {
