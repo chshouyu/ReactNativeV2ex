@@ -60,13 +60,23 @@ var ReactNativeV2ex = React.createClass({
   },
   renderItem (item) {
     return (
-      <View style={styles.item}>
+      <View style={[styles.container, styles.item]}>
         <Image
           source={{uri: `http:${ item.member.avatar_normal }`}}
           style={styles.thumbnail}
         />
         <View style={styles.itemDetail}>
           <Text style={styles.title}>{ item.title }</Text>
+          <View style={styles.info}>
+            <View style={styles.nodeWrapper}>
+              <Text style={styles.node}>{ item.node.title }</Text>
+            </View>
+            <Text style={styles.infoDot}>·</Text>
+            <Text style={styles.username}>{ item.member.username }</Text>
+          </View>
+        </View>
+        <View style={styles.repliesWrapper}>
+          <Text style={styles.replies}>{ item.replies }</Text>
         </View>
       </View>
     );
@@ -74,6 +84,12 @@ var ReactNativeV2ex = React.createClass({
 });
 
 var styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   loading: {
     paddingTop: 20,
     flex: 1,
@@ -84,26 +100,64 @@ var styles = StyleSheet.create({
     paddingTop: 20,
   },
   item: {
-    height: 50,
-    borderBottomColor: '#111',
+    height: 80,
+    borderBottomColor: 'rgb(226, 226, 226)',
     borderBottomWidth: 1,
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingLeft: 10,
+    paddingRight: 10
   },
   thumbnail: {
-    width: 50,
-    height: 50
+    width: 60,
+    height: 60
   },
   itemDetail: {
     flex: 1,
+    height: 60,
+    marginLeft: 10
   },
   title: {
     // fontSize: 20,
-    marginBottom: 10
+    lineHeight: 16,
+    height: 32,
+    overflow: 'hidden',
+    color: '#778087'
+  },
+  info: {
+    marginTop: 12,
+    flex: 1,
+    flexDirection: 'row',
+  },
+  nodeWrapper: {
+    backgroundColor: 'rgb(226, 226, 226)',
+    borderRadius: 2,
+    paddingLeft: 2,
+    paddingRight: 2,
+  },
+  node: {
+    fontSize: 12,
+    color: 'rgb(153, 153, 153)',
+    fontFamily: 'arial'
+  },
+  infoDot: {
+    marginLeft: 6,
+    marginRight: 6,
+    color: 'rgb(204, 204, 204)'
+  },
+  username: {
+    fontSize: 12,
+    color: 'rgb(119, 128, 135)',
+    fontWeight: '700'
+  },
+  repliesWrapper: {
+    width: 26,
+    marginLeft: 10,
+  },
+  replies: {
+    textAlign: 'center',
+    backgroundColor: 'rgb(170, 176, 198)',
+    color: '#fff',
+    fontWeight: '700',
+    fontSize: 12
   }
 });
 
