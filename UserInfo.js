@@ -37,6 +37,10 @@ var UserInfoView = React.createClass({
 
     return (
       <ScrollView style={[styles.container, styles.wrapper]}>
+        <Image
+          source={{uri: `http:${ userInfo.avatar_large }`}}
+          style={styles.thumbnail}
+        />
         <View>
           <Text style={styles.title}>{ userInfo.username }</Text>
           <Text style={styles.item}>网址：{ userInfo.website || '暂无' }</Text>
@@ -66,6 +70,11 @@ var styles = StyleSheet.create({
   },
   wrapper: {
     padding: 10
+  },
+  thumbnail: {
+    width: 100,
+    height: 100,
+    marginBottom: 10
   },
   title: {
     fontSize: 30
