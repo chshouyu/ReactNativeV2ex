@@ -54,6 +54,7 @@ var UserInfoView = React.createClass({
         />
         <View>
           <Text style={styles.title}>{ userInfo.username }</Text>
+          <View style={styles.border}></View>
           <Text style={styles.item}>加入时间：{ joinTime }</Text>
           <Text style={styles.item}>网址：{ userInfo.website || '暂无' }</Text>
           <Text style={styles.item}>位置：{ userInfo.location || '暂无' }</Text>
