@@ -42,7 +42,7 @@ var DetailView = React.createClass({
           </View>
           <TouchableHighlight style={styles.thumbnailWrapper} onPress={ this.gotoUserInfo.bind(this, item.member) }>
             <Image
-              source={{uri: `http:${ item.member.avatar_normal }`}}
+              source={{uri: `http:${ item.member.avatar_large }`}}
               style={styles.thumbnail}
             />
           </TouchableHighlight>

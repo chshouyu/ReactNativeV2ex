@@ -77,7 +77,7 @@ var IndexView = React.createClass({
       <TouchableHighlight underlayColor="#f1f1f1" onPress={ this.gotoDetail.bind(this, item) }>
         <View style={[styles.container, styles.item]}>
           <Image
-            source={{uri: `http:${ item.member.avatar_normal }`}}
+            source={{uri: `http:${ item.member.avatar_large }`}}
             style={styles.thumbnail}
           />
           <View style={styles.itemDetail}>
