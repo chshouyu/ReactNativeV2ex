@@ -48,7 +48,8 @@ var IndexView = React.createClass({
       component: DetailView,
       passProps: {
         item: item
-      }
+      },
+      navigator: this.props.navigator
     });
   },
   render () {

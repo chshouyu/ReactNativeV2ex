@@ -1,15 +1,29 @@
 'use strict';
 
 var React = require('react-native');
+
+var UserInfoView = require('./UserInfo');
+
 var {
   StyleSheet,
   Text,
   View,
   ScrollView,
-  Image
+  Image,
+  AlertIOS,
+  TouchableHighlight
 } = React;
 
 var DetailView = React.createClass({
+  gotoUserInfo(member) {
+    this.props.navigator.push({
+      title: `${ member.username }`,
+      component: UserInfoView,
+      passProps: {
+        memberId: member.id
+      }
+    });
+  },
   render () {
 
     var item = this.props.item;
@@ -26,10 +40,12 @@ var DetailView = React.createClass({
               <Text style={styles.datetime}>{ dateTime }</Text>
             </View>
           </View>
-          <Image
-            source={{uri: `http:${ item.member.avatar_normal }`}}
-            style={styles.thumbnail}
-          />
+          <TouchableHighlight style={styles.thumbnailWrapper} onPress={ this.gotoUserInfo.bind(this, item.member) }>
+            <Image
+              source={{uri: `http:${ item.member.avatar_normal }`}}
+              style={styles.thumbnail}
+            />
+          </TouchableHighlight>
         </View>
         <View style={styles.contentWrapper}>
           <Text style={styles.content}>{ item.content }</Text>
@@ -93,10 +109,14 @@ var styles = StyleSheet.create({
     fontSize: 12,
     color: '#999'
   },
-  thumbnail: {
+  thumbnailWrapper: {
     width: 60,
     height: 60,
     marginLeft: 10
+  },
+  thumbnail: {
+    width: 60,
+    height: 60
   },
   contentWrapper: {
     marginBottom: 20
