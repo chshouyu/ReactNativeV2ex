@@ -107,7 +107,7 @@ var styles = StyleSheet.create({
     alignItems: 'center',
   },
   loading: {
-    paddingTop: 20,
+    paddingTop: 100,
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
