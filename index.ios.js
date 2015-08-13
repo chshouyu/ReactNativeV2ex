@@ -22,7 +22,7 @@ var ReactNativeV2ex = React.createClass({
         style={styles.container}
         initialRoute={{
           component: IndexView,
-          title: 'v2ex'
+          title: 'V2EX'
         }}
       />
     );
