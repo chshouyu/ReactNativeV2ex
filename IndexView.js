@@ -64,7 +64,13 @@ var IndexView = React.createClass({
         dataSource={this.state.dataSource}
         renderRow={this.renderItem}
         style={styles.listView}
+        renderSeparator={this.renderSeparator}
       />
+    );
+  },
+  renderSeparator () {
+    return (
+      <View style={styles.separator}></View>
     );
   },
   renderItem (item) {
@@ -106,10 +112,12 @@ var styles = StyleSheet.create({
   },
   item: {
     height: 80,
-    borderBottomColor: 'rgb(226, 226, 226)',
-    borderBottomWidth: 1 / PixelRatio.get(),
     paddingLeft: 10,
     paddingRight: 10
+  },
+  separator: {
+    backgroundColor: 'rgb(226, 226, 226)',
+    height: 1 / PixelRatio.get()
   },
   thumbnail: {
     width: 60,
