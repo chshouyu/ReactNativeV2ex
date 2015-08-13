@@ -46,7 +46,7 @@ var IndexView = React.createClass({
   gotoDetail (item) {
     // AlertIOS.alert('你好', '再见');
     this.props.navigator.push({
-      title: item.title,
+      title: '话题',
       component: DetailView,
       passProps: {
         item: item

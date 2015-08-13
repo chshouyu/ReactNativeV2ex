@@ -24,7 +24,7 @@ var {
 var DetailView = React.createClass({
   gotoUserInfo(member) {
     this.props.navigator.push({
-      title: `${ member.username }`,
+      title: '成员',
       component: UserInfoView,
       passProps: {
         memberId: member.id
