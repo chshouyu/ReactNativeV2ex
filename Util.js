@@ -10,7 +10,7 @@ var formatTime = (timestamp) => {
   var min = date.getMinutes();
   var sec = date.getSeconds();
 
-  return `${year}-${mon}-${day} ${hour}:${min}:${sec}`;
+  return `${year}-${mon}-${day} ${hour}:${min}:${sec}`.replace(/([^\d])(\d)(?!\d)/g, '$10$2');
 };
 
 exports.formatTime = formatTime;
