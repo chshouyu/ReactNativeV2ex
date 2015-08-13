@@ -15,7 +15,8 @@ var {
   Navigator,
   NavigatorIOS,
   TouchableHighlight,
-  AlertIOS
+  AlertIOS,
+  PixelRatio
 } = React;
 
 var REQUEST_URL = 'https://www.v2ex.com/api/topics/latest.json';
@@ -106,7 +107,7 @@ var styles = StyleSheet.create({
   item: {
     height: 80,
     borderBottomColor: 'rgb(226, 226, 226)',
-    borderBottomWidth: 1,
+    borderBottomWidth: 1 / PixelRatio.get(),
     paddingLeft: 10,
     paddingRight: 10
   },

@@ -11,7 +11,8 @@ var {
   Text,
   View,
   ScrollView,
-  Image
+  Image,
+  PixelRatio
 } = React;
 
 var {
@@ -84,6 +85,11 @@ var styles = StyleSheet.create({
     fontSize: 16,
     marginTop: 8,
     lineHeight: 22
+  },
+  border: {
+    height: 1 / PixelRatio.get(),
+    backgroundColor: 'rgb(226, 226, 226)',
+    marginTop: 10
   }
 });
 

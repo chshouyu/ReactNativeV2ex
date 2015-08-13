@@ -13,7 +13,8 @@ var {
   ScrollView,
   Image,
   AlertIOS,
-  TouchableHighlight
+  TouchableHighlight,
+  PixelRatio
 } = React;
 
 var {
@@ -76,7 +77,7 @@ var styles = StyleSheet.create({
     marginBottom: 10,
     paddingBottom: 10,
     borderBottomColor: '#e2e2e2',
-    borderBottomWidth: 1,
+    borderBottomWidth: 1 / PixelRatio.get(),
   },
   titleWrapper: {
     flex: 1,
