@@ -3,6 +3,8 @@
 
 使用[react native](https://facebook.github.io/react-native/)开发的[v2ex](https://www.v2ex.com/)客户端
 
+感谢@Livid提供的API
+
 ## 运行
 
 本项目依赖OS X、Xcode、nodejs环境
