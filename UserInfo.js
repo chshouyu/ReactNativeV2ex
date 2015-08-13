@@ -1,6 +1,9 @@
 'use strict';
 
 var React = require('react-native');
+
+var Loading = require('./Loading');
+
 var {
   StyleSheet,
   Text,
@@ -30,7 +33,7 @@ var UserInfoView = React.createClass({
   render () {
 
     if (!this.state.userInfo) {
-      return this.renderLoading();
+      return <Loading />;
     }
 
     var userInfo = this.state.userInfo;
@@ -52,13 +55,6 @@ var UserInfoView = React.createClass({
       </ScrollView>
     );   
   },
-  renderLoading () {
-    return (
-      <View style={[styles.container, styles.loading]}>
-        <Text>加载中……</Text>
-      </View>
-    );
-  },
   formatTime (timestamp) {
     var date = new Date(timestamp * 1000);
     var year = date.getFullYear();
@@ -75,11 +71,6 @@ var UserInfoView = React.createClass({
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  loading: {
-    marginTop: 100,
-    flexDirection: 'row',
-    justifyContent: 'center',
   },
   wrapper: {
     padding: 10

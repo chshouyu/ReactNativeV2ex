@@ -4,6 +4,7 @@
 var React = require('react-native');
 
 var DetailView = require('./DetailView');
+var Loading = require('./Loading');
 
 var {
   StyleSheet,
@@ -54,7 +55,7 @@ var IndexView = React.createClass({
   },
   render () {
     if (!this.state.loaded) {
-      return this.renderLoadingView();
+      return <Loading />;
     }
 
     return (
@@ -63,13 +64,6 @@ var IndexView = React.createClass({
         renderRow={this.renderItem}
         style={styles.listView}
       />
-    );
-  },
-  renderLoadingView () {
-    return (
-      <View style={styles.loading}>
-        <Text>加载中……</Text>
-      </View>
     );
   },
   renderItem (item) {
@@ -105,12 +99,6 @@ var styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  loading: {
-    paddingTop: 100,
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
   },
   listView: {
     // paddingTop: 20,
