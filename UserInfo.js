@@ -35,6 +35,7 @@ var UserInfoView = React.createClass({
           userInfo: responseData
         });
       })
+      .done();
   },
   render () {
 
