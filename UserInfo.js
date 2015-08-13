@@ -48,7 +48,7 @@ var UserInfoView = React.createClass({
     var joinTime = formatTime(userInfo.created);
 
     return (
-      <ScrollView style={[styles.container, styles.wrapper]}>
+      <ScrollView style={styles.container} contentContainerStyle={styles.wrapper}>
         <Image
           source={{uri: `http:${ userInfo.avatar_large }`}}
           style={styles.thumbnail}
