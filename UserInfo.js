@@ -2,6 +2,8 @@
 
 var React = require('react-native');
 
+var Util = require('./Util');
+
 var Loading = require('./Loading');
 
 var {
@@ -11,6 +13,10 @@ var {
   ScrollView,
   Image
 } = React;
+
+var {
+  formatTime
+} = Util;
 
 var REQUEST_URL = 'https://www.v2ex.com/api/members/show.json';
 
@@ -37,7 +43,7 @@ var UserInfoView = React.createClass({
     }
 
     var userInfo = this.state.userInfo;
-    var joinTime = this.formatTime(userInfo.created);
+    var joinTime = formatTime(userInfo.created);
 
     return (
       <ScrollView style={[styles.container, styles.wrapper]}>
@@ -54,17 +60,6 @@ var UserInfoView = React.createClass({
         </View>
       </ScrollView>
     );   
-  },
-  formatTime (timestamp) {
-    var date = new Date(timestamp * 1000);
-    var year = date.getFullYear();
-    var mon = date.getMonth() + 1;
-    var day = date.getDate();
-    var hour = date.getHours();
-    var min = date.getMinutes();
-    var sec = date.getSeconds();
-
-    return `${year}-${mon}-${day} ${hour}:${min}:${sec}`;
   }
 });
 

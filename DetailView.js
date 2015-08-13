@@ -2,6 +2,8 @@
 
 var React = require('react-native');
 
+var Util = require('./Util');
+
 var UserInfoView = require('./UserInfo');
 
 var {
@@ -13,6 +15,10 @@ var {
   AlertIOS,
   TouchableHighlight
 } = React;
+
+var {
+  formatTime
+} = Util;
 
 var DetailView = React.createClass({
   gotoUserInfo(member) {
@@ -27,7 +33,7 @@ var DetailView = React.createClass({
   render () {
 
     var item = this.props.item;
-    var dateTime = this.formatTime(item.created);
+    var dateTime = formatTime(item.created);
 
     return (
       <ScrollView style={[styles.container, styles.wrapper]}>
@@ -52,17 +58,6 @@ var DetailView = React.createClass({
         </View>
       </ScrollView>
     );
-  },
-  formatTime (timestamp) {
-    var date = new Date(timestamp * 1000);
-    var year = date.getFullYear();
-    var mon = date.getMonth() + 1;
-    var day = date.getDate();
-    var hour = date.getHours();
-    var min = date.getMinutes();
-    var sec = date.getSeconds();
-
-    return `${year}-${mon}-${day} ${hour}:${min}:${sec}`;
   }
 });
 
