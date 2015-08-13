@@ -34,6 +34,7 @@ var UserInfoView = React.createClass({
     }
 
     var userInfo = this.state.userInfo;
+    var joinTime = this.formatTime(userInfo.created);
 
     return (
       <ScrollView style={[styles.container, styles.wrapper]}>
@@ -43,6 +44,7 @@ var UserInfoView = React.createClass({
         />
         <View>
           <Text style={styles.title}>{ userInfo.username }</Text>
+          <Text style={styles.item}>加入时间：{ joinTime }</Text>
           <Text style={styles.item}>网址：{ userInfo.website || '暂无' }</Text>
           <Text style={styles.item}>位置：{ userInfo.location || '暂无' }</Text>
           <Text style={styles.item}>备注：{ userInfo.bio || '暂无' }</Text>
@@ -56,6 +58,17 @@ var UserInfoView = React.createClass({
         <Text>加载中……</Text>
       </View>
     );
+  },
+  formatTime (timestamp) {
+    var date = new Date(timestamp * 1000);
+    var year = date.getFullYear();
+    var mon = date.getMonth() + 1;
+    var day = date.getDate();
+    var hour = date.getHours();
+    var min = date.getMinutes();
+    var sec = date.getSeconds();
+
+    return `${year}-${mon}-${day} ${hour}:${min}:${sec}`;
   }
 });
 
