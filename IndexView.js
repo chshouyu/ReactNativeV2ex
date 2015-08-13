@@ -12,11 +12,6 @@ var {
   Text,
   View,
   ListView,
-  Image,
-  Navigator,
-  NavigatorIOS,
-  TouchableHighlight,
-  AlertIOS,
   PixelRatio
 } = React;
 
@@ -62,7 +57,6 @@ var IndexView = React.createClass({
       <ListView
         dataSource={this.state.dataSource}
         renderRow={this.renderItem}
-        style={styles.listView}
         renderSeparator={this.renderSeparator}
       />
     );

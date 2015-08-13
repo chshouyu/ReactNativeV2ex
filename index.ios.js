@@ -11,7 +11,6 @@ var IndexView = require('./IndexView');
 var {
   AppRegistry,
   StyleSheet,
-  Navigator,
   NavigatorIOS,
 } = React;
 
