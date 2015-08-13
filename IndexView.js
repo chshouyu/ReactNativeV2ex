@@ -48,9 +48,7 @@ var IndexView = React.createClass({
     this.props.navigator.push({
       title: '话题',
       component: DetailView,
-      passProps: {
-        item: item
-      },
+      passProps: {item},
       navigator: this.props.navigator
     });
   },
