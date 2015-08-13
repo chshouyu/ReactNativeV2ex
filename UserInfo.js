@@ -94,7 +94,8 @@ var styles = StyleSheet.create({
   },
   item: {
     fontSize: 16,
-    marginTop: 10
+    marginTop: 8,
+    lineHeight: 22
   }
 });
 
