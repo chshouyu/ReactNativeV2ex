@@ -14,14 +14,38 @@ var {
   Image,
   AlertIOS,
   TouchableHighlight,
-  PixelRatio
+  PixelRatio,
+  ListView
 } = React;
 
 var {
   formatTime
 } = Util;
 
+var REQUEST_REPLIES_URL = 'https://www.v2ex.com/api/replies/show.json';
+
 var DetailView = React.createClass({
+  getInitialState () {
+    return {
+      dataSource: new ListView.DataSource({
+        rowHasChanged: (row1, row2) => row1 !== row2,
+      }),
+      loaded: false
+    };
+  },
+  componentDidMount () {
+    fetch(`${ REQUEST_REPLIES_URL }?topic_id=${ this.props.item.id }`)
+      .then((response) => response.json())
+      .then((responseData) => {
+        this.setState((state) => {
+          return {
+            dataSource: state.dataSource.cloneWithRows(responseData),
+            loaded: true
+          };
+        });
+      })
+      .done();
+  },
   gotoUserInfo(member) {
     this.props.navigator.push({
       title: '成员',
@@ -57,7 +81,27 @@ var DetailView = React.createClass({
         <View style={styles.contentWrapper}>
           <Text style={styles.content}>{ item.content }</Text>
         </View>
+        <View style={styles.container}>
+          <ListView
+            dataSource={this.state.dataSource}
+            renderRow={this.renderItem}
+            renderSeparator={this.renderSeparator}
+            automaticallyAdjustContentInsets={false}
+          />
+        </View>
       </ScrollView>
+    );
+  },
+  renderItem (item) {
+    return (
+      <View key={item.id}>
+        <Text>{ item.content }</Text>
+      </View>
+    );
+  },
+  renderSeparator () {
+    return (
+      <View style={styles.separator}></View>
     );
   }
 });
@@ -119,6 +163,10 @@ var styles = StyleSheet.create({
   },
   content: {
     lineHeight: 22,
+  },
+  separator: {
+    backgroundColor: 'rgb(226, 226, 226)',
+    height: 1 / PixelRatio.get()
   }
 });
 
