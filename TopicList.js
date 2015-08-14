@@ -6,13 +6,13 @@ var React = require('react-native');
 var DetailView = require('./DetailView');
 var Loading = require('./Loading');
 var ListCell = require('./ListCell');
+var Separator = require('./Separator');
 
 var {
   StyleSheet,
   Text,
   View,
-  ListView,
-  PixelRatio
+  ListView
 } = React;
 
 var REQUEST_LATEST_URL = 'https://www.v2ex.com/api/topics/latest.json';
@@ -69,9 +69,7 @@ var TopicList = React.createClass({
     );
   },
   renderSeparator () {
-    return (
-      <View style={styles.separator}></View>
-    );
+    return <Separator />;
   },
   renderItem (item) {
     return (
@@ -82,13 +80,6 @@ var TopicList = React.createClass({
         showNode={typeof this.props.nodeId === 'undefined'}
       />
     );
-  }
-});
-
-var styles = StyleSheet.create({
-  separator: {
-    backgroundColor: 'rgb(226, 226, 226)',
-    height: 1 / PixelRatio.get()
   }
 });
 

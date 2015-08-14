@@ -5,6 +5,7 @@ var React = require('react-native');
 var Util = require('./Util');
 
 var UserInfoView = require('./UserInfo');
+var Separator = require('./Separator');
 
 var {
   StyleSheet,
@@ -100,9 +101,7 @@ var DetailView = React.createClass({
     );
   },
   renderSeparator () {
-    return (
-      <View style={styles.separator}></View>
-    );
+    return <Separator />;
   }
 });
 
@@ -163,10 +162,6 @@ var styles = StyleSheet.create({
   },
   content: {
     lineHeight: 22,
-  },
-  separator: {
-    backgroundColor: 'rgb(226, 226, 226)',
-    height: 1 / PixelRatio.get()
   }
 });
 

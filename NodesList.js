@@ -6,13 +6,13 @@ var React = require('react-native');
 var Loading = require('./Loading');
 var NodeCell = require('./NodeCell');
 var TopicList = require('./TopicList');
+var Separator = require('./Separator');
 
 var {
   StyleSheet,
   Text,
   View,
-  ListView,
-  PixelRatio
+  ListView
 } = React;
 
 var REQUEST_URL = 'https://www.v2ex.com/api/nodes/all.json';
@@ -62,9 +62,7 @@ var NodesList = React.createClass({
     );
   },
   renderSeparator () {
-    return (
-      <View style={styles.separator}></View>
-    );
+    return <Separator />;
   },
   renderItem (item) {
     return (
@@ -73,11 +71,5 @@ var NodesList = React.createClass({
   }
 });
 
-var styles = StyleSheet.create({
-  separator: {
-    backgroundColor: 'rgb(226, 226, 226)',
-    height: 1 / PixelRatio.get()
-  }
-});
 
 module.exports = NodesList;
