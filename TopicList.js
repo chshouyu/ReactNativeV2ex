@@ -52,8 +52,7 @@ var TopicList = React.createClass({
     this.props.navigator.push({
       title: '话题',
       component: DetailView,
-      passProps: {item},
-      navigator: this.props.navigator
+      passProps: {item}
     });
   },
   render () {
