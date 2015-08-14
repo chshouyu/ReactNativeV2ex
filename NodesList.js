@@ -5,7 +5,7 @@ var React = require('react-native');
 
 var Loading = require('./Loading');
 var NodeCell = require('./NodeCell');
-var IndexView = require('./IndexView');
+var TopicList = require('./TopicList');
 
 var {
   StyleSheet,
@@ -42,7 +42,7 @@ var NodesList = React.createClass({
   gotoNodeList (item) {
     this.props.navigator.push({
       title: item.title,
-      component: IndexView,
+      component: TopicList,
       passProps: {
         nodeId: item.id
       }

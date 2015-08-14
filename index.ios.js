@@ -6,7 +6,7 @@
 
 var React = require('react-native');
 
-var IndexView = require('./IndexView');
+var TopicList = require('./TopicList');
 var NodesList = require('./NodesList');
 
 var {
@@ -39,7 +39,7 @@ var ReactNativeV2ex = React.createClass({
           <NavigatorIOS
             style={styles.container}
             initialRoute={{
-              component: IndexView,
+              component: TopicList,
               title: 'V2EX'
             }}
           />
