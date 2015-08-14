@@ -34,6 +34,7 @@ var ReactNativeV2ex = React.createClass({
       <TabBarIOS>
         <TabBarIOS.Item
           title="主页"
+          systemIcon="top-rated"
           selected={this.state.selectedTab === 'home'}
           onPress={this.changeTab.bind(this, 'home')}>
           <NavigatorIOS
@@ -46,6 +47,7 @@ var ReactNativeV2ex = React.createClass({
         </TabBarIOS.Item>
         <TabBarIOS.Item
           title="全部节点"
+          systemIcon="more"
           selected={this.state.selectedTab === 'nodes'}
           onPress={this.changeTab.bind(this, 'nodes')}>
           <NavigatorIOS
