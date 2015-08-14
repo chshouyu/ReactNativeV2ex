@@ -6,8 +6,8 @@
 
 var React = require('react-native');
 
-var TopicList = require('./TopicList');
-var NodesList = require('./NodesList');
+var IndexView = require('./IndexView');
+var NodesView = require('./NodesView');
 
 var {
   AppRegistry,
@@ -40,7 +40,7 @@ var ReactNativeV2ex = React.createClass({
           <NavigatorIOS
             style={styles.container}
             initialRoute={{
-              component: TopicList,
+              component: IndexView,
               title: 'V2EX'
             }}
           />
@@ -53,7 +53,7 @@ var ReactNativeV2ex = React.createClass({
           <NavigatorIOS
             style={styles.container}
             initialRoute={{
-              component: NodesList,
+              component: NodesView,
               title: '节点列表'
             }}
           />
