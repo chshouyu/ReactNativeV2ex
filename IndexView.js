@@ -80,6 +80,7 @@ var IndexView = React.createClass({
         key={item.id}
         item={item}
         gotoDetail={this.gotoDetail.bind(this, item)}
+        showNode={typeof this.props.nodeId === 'undefined'}
       />
     );
   }

@@ -26,10 +26,14 @@ var ListCell = React.createClass({
           <View style={styles.itemDetail}>
             <Text style={styles.title}>{ item.title }</Text>
             <View style={styles.info}>
-              <View style={styles.nodeWrapper}>
-                <Text style={styles.node}>{ item.node.title }</Text>
-              </View>
-              <Text style={styles.infoDot}>·</Text>
+              { this.props.showNode ? (
+                <View style={styles.nodeWrapper}>
+                  <Text style={styles.node}>{ item.node.title }</Text>
+                </View>
+              ) : null }
+              { this.props.showNode ? (
+                <Text style={styles.infoDot}>·</Text>
+              ) : null }
               <Text style={styles.username}>{ item.member.username }</Text>
             </View>
           </View>
