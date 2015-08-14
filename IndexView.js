@@ -18,7 +18,7 @@ var {
 var REQUEST_LATEST_URL = 'https://www.v2ex.com/api/topics/latest.json';
 var REQUEST_NODE_URL = 'https://www.v2ex.com/api/topics/show.json';
 
-var IndexView = React.createClass({
+var TopicList = React.createClass({
   getInitialState () {
     return {
       dataSource: new ListView.DataSource({
@@ -93,4 +93,4 @@ var styles = StyleSheet.create({
   }
 });
 
-module.exports = IndexView;
+module.exports = TopicList;
