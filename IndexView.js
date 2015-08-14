@@ -76,7 +76,11 @@ var IndexView = React.createClass({
   },
   renderItem (item) {
     return (
-      <ListCell key={item.id} item={item} gotoDetail={this.gotoDetail.bind(this, item)} />
+      <ListCell
+        key={item.id}
+        item={item}
+        gotoDetail={this.gotoDetail.bind(this, item)}
+      />
     );
   }
 });
