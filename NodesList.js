@@ -58,6 +58,7 @@ var NodesList = React.createClass({
         dataSource={this.state.dataSource}
         renderRow={this.renderItem}
         renderSeparator={this.renderSeparator}
+        initialListSize={20}
       />
     );
   },
