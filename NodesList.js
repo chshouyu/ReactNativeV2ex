@@ -3,9 +3,9 @@
 
 var React = require('react-native');
 
-var DetailView = require('./DetailView');
 var Loading = require('./Loading');
-var ListCell = require('./ListCell');
+var NodeCell = require('./NodeCell');
+var IndexView = require('./IndexView');
 
 var {
   StyleSheet,
@@ -15,10 +15,9 @@ var {
   PixelRatio
 } = React;
 
-var REQUEST_LATEST_URL = 'https://www.v2ex.com/api/topics/latest.json';
-var REQUEST_NODE_URL = 'https://www.v2ex.com/api/topics/show.json';
+var REQUEST_URL = 'https://www.v2ex.com/api/nodes/all.json';
 
-var IndexView = React.createClass({
+var NodesList = React.createClass({
   getInitialState () {
     return {
       dataSource: new ListView.DataSource({
@@ -28,14 +27,7 @@ var IndexView = React.createClass({
     };
   },
   componentDidMount () {
-
-    var url = REQUEST_LATEST_URL;
-
-    if (this.props.nodeId) {
-      url = `${ REQUEST_NODE_URL }?node_id=${ this.props.nodeId }`;
-    }
-
-    fetch(url)
+    fetch(REQUEST_URL)
       .then((response) => response.json())
       .then((responseData) => {
         this.setState((state) => {
@@ -47,13 +39,13 @@ var IndexView = React.createClass({
       })
       .done();
   },
-  gotoDetail (item) {
-    // AlertIOS.alert('你好', '再见');
+  gotoNodeList (item) {
     this.props.navigator.push({
-      title: '话题',
-      component: DetailView,
-      passProps: {item},
-      navigator: this.props.navigator
+      title: item.title,
+      component: IndexView,
+      passProps: {
+        nodeId: item.id
+      }
     });
   },
   render () {
@@ -76,7 +68,7 @@ var IndexView = React.createClass({
   },
   renderItem (item) {
     return (
-      <ListCell key={item.id} item={item} gotoDetail={this.gotoDetail.bind(this, item)} />
+      <NodeCell item={item} gotoNodeList={this.gotoNodeList.bind(this, item)} />
     );
   }
 });
@@ -88,4 +80,4 @@ var styles = StyleSheet.create({
   }
 });
 
-module.exports = IndexView;
+module.exports = NodesList;
