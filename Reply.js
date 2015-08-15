@@ -10,7 +10,8 @@ var {
   Text,
   View,
   Image,
-  ListView
+  ListView,
+  ActivityIndicatorIOS
 } = React;
 
 var REQUEST_REPLIES_URL = 'https://www.v2ex.com/api/replies/show.json';
@@ -43,6 +44,13 @@ var Reply = React.createClass({
   render () {
     return (
       <View style={styles.container}>
+        { !this.state.loaded ? (
+          <View style={styles.loading}>
+            <ActivityIndicatorIOS
+              animating={true}
+            />
+          </View>
+        ) : null }
         <ListView
           dataSource={this.state.dataSource}
           renderRow={this.renderItem}
@@ -63,6 +71,11 @@ var Reply = React.createClass({
 var styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  loading: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
