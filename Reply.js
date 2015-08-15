@@ -27,7 +27,7 @@ var Reply = React.createClass({
   },
   componentDidMount () {
 
-    var url = `${ REQUEST_REPLIES_URL }?page_size=100&topic_id=${ this.props.id }`;
+    var url = `${ REQUEST_REPLIES_URL }?page_size=100&_t=${ Date.now() }&topic_id=${ this.props.id }`;
     
     fetch(url)
       .then((response) => response.json())
