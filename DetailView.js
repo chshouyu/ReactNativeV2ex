@@ -5,7 +5,7 @@ var React = require('react-native');
 var Util = require('./Util');
 
 var UserInfoView = require('./UserInfo');
-var Separator = require('./Separator');
+var Reply = require('./Reply');
 
 var {
   StyleSheet,
@@ -23,30 +23,7 @@ var {
   formatTime
 } = Util;
 
-var REQUEST_REPLIES_URL = 'https://www.v2ex.com/api/replies/show.json';
-
 var DetailView = React.createClass({
-  getInitialState () {
-    return {
-      dataSource: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2,
-      }),
-      loaded: false
-    };
-  },
-  componentDidMount () {
-    fetch(`${ REQUEST_REPLIES_URL }?topic_id=${ this.props.item.id }`)
-      .then((response) => response.json())
-      .then((responseData) => {
-        this.setState((state) => {
-          return {
-            dataSource: state.dataSource.cloneWithRows(responseData),
-            loaded: true
-          };
-        });
-      })
-      .done();
-  },
   gotoUserInfo(member) {
     this.props.navigator.push({
       title: '成员',
@@ -82,26 +59,9 @@ var DetailView = React.createClass({
         <View style={styles.contentWrapper}>
           <Text style={styles.content}>{ item.content }</Text>
         </View>
-        <View style={styles.container}>
-          <ListView
-            dataSource={this.state.dataSource}
-            renderRow={this.renderItem}
-            renderSeparator={this.renderSeparator}
-            automaticallyAdjustContentInsets={false}
-          />
-        </View>
+        <Reply id={item.id} />
       </ScrollView>
     );
-  },
-  renderItem (item) {
-    return (
-      <View key={item.id}>
-        <Text>{ item.content }</Text>
-      </View>
-    );
-  },
-  renderSeparator () {
-    return <Separator />;
   }
 });
 
