@@ -19,7 +19,7 @@ var ReplyCell = React.createClass({
     return (
       <View style={[styles.container, styles.item]}>
         <Image
-          source={{uri: `http:${ item.member.avatar_large }`}}
+          source={{uri: `http:${ item.member.avatar_normal }`}}
           style={styles.thumbnail}
         />
         <View style={styles.itemDetail}>
