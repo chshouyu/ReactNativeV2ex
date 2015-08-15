@@ -2,6 +2,8 @@
 
 var React = require('react-native');
 
+var Util = require('./Util');
+
 var {
   StyleSheet,
   Text,
@@ -10,6 +12,10 @@ var {
   PixelRatio,
   ListView
 } = React;
+
+var {
+  formatTime
+} = Util;
 
 var ReplyCell = React.createClass({
   render () {
@@ -23,7 +29,11 @@ var ReplyCell = React.createClass({
           style={styles.thumbnail}
         />
         <View style={styles.itemDetail}>
-          <Text style={styles.username}>{ item.member.username }</Text>
+          <Text>
+            <Text style={styles.username}>{ item.member.username }</Text>
+            {'  '}
+            <Text style={styles.datetime}>{ formatTime(item.last_modified) }</Text>
+          </Text>
           <View style={styles.contentWrapper}>
             <Text style={styles.content}>{ item.content }</Text>
           </View>
@@ -54,6 +64,11 @@ var styles = StyleSheet.create({
     fontSize: 12,
     color: 'rgb(119, 128, 135)',
     fontWeight: '700'
+  },
+  datetime: {
+    fontSize: 12,
+    color: '#999',
+    marginLeft: 8
   },
   contentWrapper: {
     marginTop: 4
