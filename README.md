@@ -9,7 +9,7 @@
 
 本项目依赖OS X、Xcode、nodejs环境
 
-官方建议使用[iojs](https://iojs.org/)，可以使用nvm来管理nodejs版本，关于nvm请参考[此处](https://github.com/creationix/nvm#installation)
+官方建议使用[iojs](https://iojs.org/)（nodejs分支），为了方便管理nodejs版本，可以使用nvm。关于nvm请参考[此处](https://github.com/creationix/nvm#installation)
 
 iojs安装完毕之后
 
@@ -17,7 +17,7 @@ iojs安装完毕之后
     $ cd ReactNativeV2ex/
     $ npm i
 
-之后在finder中用xcode打开`ReactNativeV2ex.xcodeproj`，编译运行即可
+然后在finder中用xcode打开`ReactNativeV2ex.xcodeproj`，编译运行即可
 
 部分截图如下：
 
