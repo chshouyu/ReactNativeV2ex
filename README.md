@@ -26,3 +26,7 @@ iojs安装完毕之后
 ![ios simulator screen shot 2015 8 13 4 42 50](https://cloud.githubusercontent.com/assets/1304342/9246030/62e8485e-41db-11e5-8b74-6710178b7131.png)
 
 ![ios simulator screen shot 2015 8 13 4 42 55](https://cloud.githubusercontent.com/assets/1304342/9246031/63031b5c-41db-11e5-995c-6db520478f88.png)
+
+# License
+
+MIT
