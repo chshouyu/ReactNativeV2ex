@@ -19,13 +19,11 @@ iojs安装完毕之后
 
 然后在finder中用xcode打开`ReactNativeV2ex.xcodeproj`，编译运行即可
 
-部分截图如下：
+效果预览如下：
 
-![ios simulator screen shot 2015 8 13 4 42 41](https://cloud.githubusercontent.com/assets/1304342/9246029/62e516de-41db-11e5-937f-4b07c70a0104.png)
+![react-native-v2ex1](https://cloud.githubusercontent.com/assets/1304342/9402829/b9609eaa-4813-11e5-9786-9f8aed08c40a.gif)
 
-![ios simulator screen shot 2015 8 13 4 42 50](https://cloud.githubusercontent.com/assets/1304342/9246030/62e8485e-41db-11e5-8b74-6710178b7131.png)
-
-![ios simulator screen shot 2015 8 13 4 42 55](https://cloud.githubusercontent.com/assets/1304342/9246031/63031b5c-41db-11e5-995c-6db520478f88.png)
+![react-native-v2ex2](https://cloud.githubusercontent.com/assets/1304342/9402840/d66e6c7a-4813-11e5-87b4-a8451d465092.gif)
 
 # License
 
