@@ -6,6 +6,7 @@ var Util = require('./Util');
 
 var UserInfoView = require('./UserInfo');
 var Reply = require('./Reply');
+var ParsedContent = require('./ParsedContent');
 
 var {
   StyleSheet,
@@ -57,7 +58,7 @@ var DetailView = React.createClass({
           </TouchableHighlight>
         </View>
         <View style={styles.contentWrapper}>
-          <Text style={styles.content}>{ item.content }</Text>
+          <ParsedContent content={ item.content } contentType="detail" />
         </View>
         <Reply id={item.id} />
       </ScrollView>
@@ -119,9 +120,6 @@ var styles = StyleSheet.create({
   },
   contentWrapper: {
     marginBottom: 20
-  },
-  content: {
-    lineHeight: 22,
   }
 });
 

@@ -4,6 +4,8 @@ var React = require('react-native');
 
 var Util = require('./Util');
 
+var ParsedContent = require('./ParsedContent');
+
 var {
   StyleSheet,
   Text,
@@ -35,7 +37,7 @@ var ReplyCell = React.createClass({
             <Text style={styles.datetime}>{ formatTime(item.last_modified) }</Text>
           </Text>
           <View style={styles.contentWrapper}>
-            <Text style={styles.content}>{ item.content }</Text>
+            <ParsedContent content={ item.content } contentType="reply" />
           </View>
         </View>
       </View>
@@ -72,9 +74,6 @@ var styles = StyleSheet.create({
   },
   contentWrapper: {
     marginTop: 4
-  },
-  content: {
-    lineHeight: 20
   }
 });
 
