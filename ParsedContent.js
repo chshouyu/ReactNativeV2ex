@@ -27,7 +27,7 @@ var ParsedContent = React.createClass({
       result.push(
         <Image
           source={{uri: match[0]}}
-          style={{height: 200}}
+          style={styles.contentImage}
           resizeMode="contain"
         />
       );
@@ -45,6 +45,9 @@ var ParsedContent = React.createClass({
 });
 
 var styles = StyleSheet.create({
+  contentImage: {
+    height: 200,
+  },
   detailContent: {
     lineHeight: 22
   },
