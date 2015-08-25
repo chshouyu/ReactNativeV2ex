@@ -2,41 +2,54 @@
 
 var React = require('react-native');
 
-var IMAGE_URI_REG = /(http|https):\/\/.+?\.(jpg|png|gif|bmp|jpeg)/gi;
+var INFO_REG = /((?:http|https):\/\/\S+)|(@\w+)/i;
 
 var {
   StyleSheet,
   Text,
   View,
-  Image
+  Image,
+  TouchableHighlight,
+  LinkingIOS
 } = React;
 
 var ParsedContent = React.createClass({
+  openLink (url) {
+    LinkingIOS.openURL(url);
+  },
   render () {
-    var match, index = 0, result = [];
+    var match, index = 0, result = null;
     var content = this.props.content;
 
     var contentStyle = styles[this.props.contentType === 'detail' ? 'detailContent' : 'replyContent'];
-  
-    while (match = IMAGE_URI_REG.exec(content)) {
-      if (match.index > 0) {
-        result.push(
-          <Text style={contentStyle}>{ content.slice(index, match.index) }</Text>
+
+    result = content.split(INFO_REG).filter((snippet, index) => !!snippet).map((snippet, index) => {
+      if (snippet.match(/^http/)) {
+        if (snippet.match(/\.(jpg|png|gif|bmp|jpeg)$/)) {
+          return (
+            <Image
+              source={{uri: snippet}}
+              style={styles.contentImage}
+              resizeMode="contain"
+            />
+          );
+        } else {
+          return (
+            <TouchableHighlight underlayColor="#fff" onPress={this.openLink.bind(null, snippet)}>
+              <Text style={styles.atLink}>{ snippet }</Text>
+            </TouchableHighlight>
+          );
+        }
+      } else if (snippet.match(/^@/)) {
+        return (
+          <Text style={styles.atLink}>{ snippet }</Text>
+        );
+      } else {
+        return (
+          <Text style={contentStyle}>{ snippet }</Text>
         );
       }
-      result.push(
-        <Image
-          source={{uri: match[0]}}
-          style={styles.contentImage}
-          resizeMode="contain"
-        />
-      );
-      index = match.index + match[0].length;
-    }
-    
-    result.push(
-      <Text style={contentStyle}>{ content.slice(index) }</Text>
-    );
+    });
 
     return (
       <View>{ result }</View>
@@ -53,6 +66,9 @@ var styles = StyleSheet.create({
   },
   replyContent: {
     lineHeight: 20
+  },
+  atLink: {
+    color: 'rgb(119, 128, 135)'
   }
 });
 
