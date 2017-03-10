@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {
   Text,
-  View
+  View,
+  StyleSheet
 } from 'react-native';
 import { observer } from 'mobx-react/native';
 import Store from './store';
@@ -9,13 +10,20 @@ import Store from './store';
 @observer
 class App extends Component {
   render() {
+    const { topics } = this.props.store;
     return (
-      <View>
+      <View style={styles.container}>
         <Text>hello</Text>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: 20
+  }
+});
 
 const store = new Store();
 
