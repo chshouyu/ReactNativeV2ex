@@ -12,6 +12,7 @@ class HomeTab extends Component {
   static navigationOptions = {
     title: 'V2EX'
   }
+
   render() {
     return (
       <HomeTabNavigator />

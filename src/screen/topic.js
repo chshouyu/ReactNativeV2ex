@@ -11,6 +11,7 @@ export default class extends Component {
   static navigationOptions = {
     title: ({ state }) => state.params.name
   }
+
   render() {
     return (
       <View>
