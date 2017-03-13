@@ -1,36 +1,24 @@
 import React, { Component } from 'react';
-import {
-  Text,
-  View,
-  StyleSheet
-} from 'react-native';
-import { observer } from 'mobx-react/native';
-import Store from './store';
+import { TabNavigator, StackNavigator } from 'react-navigation';
+import Home from './screen/home';
+import Topic from './screen/topic';
 
-@observer
-class App extends Component {
-  render() {
-    const { topics } = this.props.store;
-    return (
-      <View style={styles.container}>
-        <Text>hello</Text>
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: 20
-  }
+const HomeTabNavigator = StackNavigator({
+  Home: { screen: Home },
+  Topic: { screen: Topic }
 });
 
-const store = new Store();
-
-export default class extends Component {
+class HomeTab extends Component {
+  static navigationOptions = {
+    title: 'V2EX'
+  }
   render() {
     return (
-      <App store={store} />
+      <HomeTabNavigator />
     );
   }
 }
+
+export default TabNavigator({
+  HomeTab: { screen: HomeTab }
+});
