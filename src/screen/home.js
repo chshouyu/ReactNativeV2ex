@@ -55,13 +55,14 @@ class HomeScreen extends Component {
     } = this.props.store;
     return (
       <ListView
-        initialListSize={10}
+        initialListSize={20}
         dataSource={dataSource}
         renderRow={this.renderRow.bind(this)}
         enableEmptySections={true}
         renderSeparator={this.renderSeparator}
         refreshControl={
           <RefreshControl
+            title="加载中..."
             onRefresh={fetchTopics}
             refreshing={refreshing} />
         } />
