@@ -1006,6 +1006,7 @@
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = EA9C2NJTK5;
 				INFOPLIST_FILE = ReactNativeV2ex/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1014,6 +1015,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.chenshouyu.ReactNativeV2ex;
 				PRODUCT_NAME = ReactNativeV2ex;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1025,6 +1027,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = EA9C2NJTK5;
 				INFOPLIST_FILE = ReactNativeV2ex/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1033,6 +1036,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.chenshouyu.ReactNativeV2ex;
 				PRODUCT_NAME = ReactNativeV2ex;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
