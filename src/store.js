@@ -1,13 +1,16 @@
-import { ListView } from 'react-native';
+import { ListView, AsyncStorage } from 'react-native';
 import {
   observable,
   action,
-  computed
+  computed,
+  reaction,
+  runInAction
 } from 'mobx';
 import { fetchTopics } from './fetch';
 import {
   EVENT_LOADING_TOPICS_SUCCESS,
-  EVENT_LOADING_TOPICS_FAIL
+  EVENT_LOADING_TOPICS_FAIL,
+  CACHED_TOPICS_KEY
 } from './constant';
 
 export default class Store {
@@ -19,6 +22,10 @@ export default class Store {
 
   constructor(eventEmitter) {
     this.eventEmitter = eventEmitter;
+
+    reaction(() => this.topicsToJS(), (jsTopics) => {
+      AsyncStorage.setItem(CACHED_TOPICS_KEY, JSON.stringify(jsTopics));
+    });
   }
 
   @computed get dataSource() {
@@ -30,17 +37,34 @@ export default class Store {
     this.refreshing = true;
     try {
       const topics = await fetchTopics();
-      this.setTopics(topics);
+      runInAction(() => {
+        this.refreshing = false;
+        this.topics = topics;
+      });
+      this.eventEmitter.emit(EVENT_LOADING_TOPICS_SUCCESS);
     } catch (e) {
       this.refreshing = false;
       this.eventEmitter.emit(EVENT_LOADING_TOPICS_FAIL);
     }
   }
 
-  @action
-  setTopics(topics) {
-    this.refreshing = false;
-    this.topics = topics;
-    this.eventEmitter.emit(EVENT_LOADING_TOPICS_SUCCESS);
+  @action.bound
+  async fetchCachedTopics() {
+    try {
+      const jsTopics = await AsyncStorage.getItem(CACHED_TOPICS_KEY);
+      const topics = JSON.parse(jsTopics);
+      runInAction(() => {
+        this.topics = topics;
+      });
+    } catch (e) {}
+  }
+
+  topicsToJS() {
+    return this.topics.map((topic) => {
+      return Object.keys(topic).reduce((obj, key) => {
+        obj[key] = topic[key];
+        return obj;
+      }, {});
+    });
   }
 }

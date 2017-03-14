@@ -21,7 +21,7 @@ import {
 class HomeScreen extends Component {
   componentDidMount() {
     this.initEventEmitter();
-    this.props.store.fetchTopics();
+    this.initTopics();
   }
 
   initEventEmitter() {
@@ -32,6 +32,12 @@ class HomeScreen extends Component {
     eventEmitter.on(EVENT_LOADING_TOPICS_FAIL, () => {
 
     });
+  }
+
+  async initTopics() {
+    const { fetchTopics, fetchCachedTopics } = this.props.store;
+    await fetchCachedTopics();
+    fetchTopics();
   }
 
   renderRow(rowData, sectionID, rowID, highlightRow) {

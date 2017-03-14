@@ -4,3 +4,5 @@ export const REQUEST_NODE_URL = 'https://www.v2ex.com/api/topics/show.json';
 
 export const EVENT_LOADING_TOPICS_SUCCESS = 'EVENT_LOADING_TOPICS_SUCCESS';
 export const EVENT_LOADING_TOPICS_FAIL = 'EVENT_LOADING_TOPICS_FAIL';
+
+export const CACHED_TOPICS_KEY = '@CACHED_TOPICS:key';
