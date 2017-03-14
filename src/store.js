@@ -5,7 +5,8 @@ import {
   computed,
   reaction,
   runInAction,
-  intercept
+  intercept,
+  toJS
 } from 'mobx';
 import { fetchTopics } from './fetch';
 import {
@@ -26,7 +27,7 @@ export default class Store {
     this.eventEmitter = eventEmitter;
     AppState.addEventListener('change', this.appStateChange.bind(this));
 
-    reaction(() => this.topicsToJS(), async (jsTopics) => {
+    reaction(() => toJS(this.topics), async (jsTopics) => {
       try {
         await AsyncStorage.setItem(CACHED_TOPICS_KEY, JSON.stringify(jsTopics));
       } catch (e) {}
@@ -88,14 +89,5 @@ export default class Store {
         this.topics = jsTopics;
       });
     } catch (e) {}
-  }
-
-  topicsToJS() {
-    return this.topics.map(topic => {
-      return Object.keys(topic).reduce((obj, key) => {
-        obj[key] = topic[key];
-        return obj;
-      }, {});
-    });
   }
 }
