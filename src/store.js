@@ -4,7 +4,8 @@ import {
   action,
   computed,
   reaction,
-  runInAction
+  runInAction,
+  intercept
 } from 'mobx';
 import { fetchTopics } from './fetch';
 import {
@@ -23,8 +24,30 @@ export default class Store {
   constructor(eventEmitter) {
     this.eventEmitter = eventEmitter;
 
-    reaction(() => this.topicsToJS(), (jsTopics) => {
-      AsyncStorage.setItem(CACHED_TOPICS_KEY, JSON.stringify(jsTopics));
+    reaction(() => this.topicsToJS(), async (jsTopics) => {
+      try {
+        await AsyncStorage.setItem(CACHED_TOPICS_KEY, JSON.stringify(jsTopics));
+      } catch (e) {}
+    }, { delay: 100 });
+
+    intercept(this, 'topics', change => {
+      if (!change.newValue) {
+        return null;
+      }
+
+      if (typeof change.newValue === 'string') {
+        try {
+          change.newValue = JSON.parse(change.newValue);
+        } catch (e) {
+          return null;
+        }
+      }
+
+      if (Array.isArray(change.newValue)) {
+        return change;
+      }
+
+      return null;
     });
   }
 
@@ -50,13 +73,10 @@ export default class Store {
 
   @action.bound
   async fetchCachedTopics() {
-    try {
-      const jsTopics = await AsyncStorage.getItem(CACHED_TOPICS_KEY);
-      const topics = JSON.parse(jsTopics);
-      runInAction(() => {
-        this.topics = topics;
-      });
-    } catch (e) {}
+    const jsTopics = await AsyncStorage.getItem(CACHED_TOPICS_KEY);
+    runInAction(() => {
+      this.topics = jsTopics;
+    });
   }
 
   topicsToJS() {
