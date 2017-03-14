@@ -24,6 +24,12 @@ class HomeScreen extends Component {
     this.initTopics();
   }
 
+  componentWillUnmount() {
+    const eventEmitter = this.props.eventEmitter;
+    eventEmitter.removeListener(EVENT_LOADING_TOPICS_SUCCESS);
+    eventEmitter.removeListener(EVENT_LOADING_TOPICS_FAIL);
+  }
+
   initEventEmitter() {
     const eventEmitter = this.props.eventEmitter;
     eventEmitter.on(EVENT_LOADING_TOPICS_SUCCESS, () => {
