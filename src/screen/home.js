@@ -9,13 +9,29 @@ import {
   RefreshControl
 } from 'react-native';
 import { observer } from 'mobx-react/native';
+import EventEmitter from 'eventemitter3';
 import Store from '../store';
 import TopicItem from '../components/topic-item';
+import {
+  EVENT_LOADING_TOPICS_SUCCESS,
+  EVENT_LOADING_TOPICS_FAIL
+} from '../constant';
 
 @observer
 class HomeScreen extends Component {
   componentDidMount() {
+    this.initEventEmitter();
     this.props.store.fetchTopics();
+  }
+
+  initEventEmitter() {
+    const eventEmitter = this.props.eventEmitter;
+    eventEmitter.on(EVENT_LOADING_TOPICS_SUCCESS, () => {
+
+    });
+    eventEmitter.on(EVENT_LOADING_TOPICS_FAIL, () => {
+
+    });
   }
 
   renderRow(rowData, sectionID, rowID, highlightRow) {
@@ -77,7 +93,8 @@ const styles = StyleSheet.create({
   }
 });
 
-const store = new Store();
+const ee = new EventEmitter();
+const store = new Store(ee);
 
 export default class extends Component {
   static navigationOptions = {
@@ -86,7 +103,7 @@ export default class extends Component {
 
   render() {
     return (
-      <HomeScreen store={store} {...this.props} />
+      <HomeScreen eventEmitter={ee} store={store} {...this.props} />
     );
   }
 }
