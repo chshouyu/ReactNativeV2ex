@@ -1,4 +1,4 @@
-import { ListView, AsyncStorage } from 'react-native';
+import { ListView, AsyncStorage, AppState } from 'react-native';
 import {
   observable,
   action,
@@ -18,11 +18,13 @@ export default class Store {
   eventEmitter;
   ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id});
   initDS = this.ds.cloneWithRows(this.topics.slice());
+  appState = AppState.currentState;
   @observable topics = [];
   @observable refreshing = false;
 
   constructor(eventEmitter) {
     this.eventEmitter = eventEmitter;
+    AppState.addEventListener('change', this.appStateChange.bind(this));
 
     reaction(() => this.topicsToJS(), async (jsTopics) => {
       try {
@@ -49,6 +51,13 @@ export default class Store {
 
       return null;
     });
+  }
+
+  appStateChange(nextAppState) {
+    if (this.appState.match(/inactive|background/) && nextAppState === 'active') {
+      this.fetchTopics();
+    }
+    this.appState = nextAppState;
   }
 
   @computed get dataSource() {
