@@ -16,10 +16,12 @@ import {
 } from './constant';
 
 export default class Store {
+
   eventEmitter;
   ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id});
   initDS = this.ds.cloneWithRows(this.topics.slice());
   appState = AppState.currentState;
+
   @observable topics = [];
   @observable refreshing = false;
 
