@@ -18,8 +18,10 @@ export default class Store {
 
   @action.bound
   async fetchTopics() {
-    const topics = await fetchTopics();
-    this.setTopics(topics);
+    try {
+      const topics = await fetchTopics();
+      this.setTopics(topics);
+    } catch (e) {}
   }
 
   @action
