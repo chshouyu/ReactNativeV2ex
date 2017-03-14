@@ -5,7 +5,8 @@ import {
   StyleSheet,
   ListView,
   PixelRatio,
-  TouchableHighlight
+  TouchableHighlight,
+  RefreshControl
 } from 'react-native';
 import { observer } from 'mobx-react/native';
 import Store from '../store';
@@ -40,14 +41,23 @@ class HomeScreen extends Component {
 
   render() {
     const { navigate } = this.props.navigation;
-    const { dataSource } = this.props.store;
+    const {
+      dataSource,
+      refreshing,
+      fetchTopics
+    } = this.props.store;
     return (
       <ListView
         initialListSize={10}
         dataSource={dataSource}
         renderRow={this.renderRow}
         enableEmptySections={true}
-        renderSeparator={this.renderSeparator} />
+        renderSeparator={this.renderSeparator}
+        refreshControl={
+          <RefreshControl
+            onRefresh={fetchTopics}
+            refreshing={refreshing} />
+        } />
     );
   }
 }
