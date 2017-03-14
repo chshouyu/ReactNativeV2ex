@@ -4,7 +4,7 @@ export function redLog(message) {
 }
 
 export function delay(time = 400) {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     setTimeout(() => {
       resolve();
     }, time);

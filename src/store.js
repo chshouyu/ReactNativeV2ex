@@ -80,7 +80,7 @@ export default class Store {
   }
 
   topicsToJS() {
-    return this.topics.map((topic) => {
+    return this.topics.map(topic => {
       return Object.keys(topic).reduce((obj, key) => {
         obj[key] = topic[key];
         return obj;
