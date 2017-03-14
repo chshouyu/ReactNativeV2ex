@@ -4,7 +4,6 @@ import {
   action,
   computed
 } from 'mobx';
-import V4 from 'uuid/v4';
 import { fetchTopics } from './fetch';
 
 export default class Store {
