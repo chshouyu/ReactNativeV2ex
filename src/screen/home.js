@@ -23,12 +23,20 @@ class HomeScreen extends Component {
       <TouchableHighlight
         key={rowData.id}
         underlayColor="#f1f1f1"
-        onPress={() => highlightRow(sectionID, rowID)}>
+        onPress={() => {
+          highlightRow(sectionID, rowID)
+          this.gotoTopic(rowData);
+        }}>
         <View>
           <TopicItem showNode={true} rowData={rowData} />
         </View>
       </TouchableHighlight>
     );
+  }
+
+  gotoTopic(rowData) {
+    const { navigate } = this.props.navigation;
+    navigate('Topic', { rowData });
   }
 
   renderSeparator(sectionID, rowID) {
@@ -40,7 +48,6 @@ class HomeScreen extends Component {
   }
 
   render() {
-    const { navigate } = this.props.navigation;
     const {
       dataSource,
       refreshing,
@@ -50,7 +57,7 @@ class HomeScreen extends Component {
       <ListView
         initialListSize={10}
         dataSource={dataSource}
-        renderRow={this.renderRow}
+        renderRow={this.renderRow.bind(this)}
         enableEmptySections={true}
         renderSeparator={this.renderSeparator}
         refreshControl={

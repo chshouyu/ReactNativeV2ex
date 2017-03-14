@@ -9,14 +9,17 @@ import {
 
 export default class extends Component {
   static navigationOptions = {
-    title: ({ state }) => state.params.name
+    title: ({ state }) => state.params.rowData.title
   }
 
   render() {
+    const { state } = this.props.navigation;
     return (
-      <View>
-        <Text>Topic....</Text>
-      </View>
+      <ScrollView>
+        <View>
+          <Text>{state.params.rowData.title}</Text>
+        </View>
+      </ScrollView>
     );
   }
 }
