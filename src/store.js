@@ -73,10 +73,12 @@ export default class Store {
 
   @action.bound
   async fetchCachedTopics() {
-    const jsTopics = await AsyncStorage.getItem(CACHED_TOPICS_KEY);
-    runInAction(() => {
-      this.topics = jsTopics;
-    });
+    try {
+      const jsTopics = await AsyncStorage.getItem(CACHED_TOPICS_KEY);
+      runInAction(() => {
+        this.topics = jsTopics;
+      });
+    } catch (e) {}
   }
 
   topicsToJS() {
