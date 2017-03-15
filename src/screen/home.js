@@ -26,19 +26,19 @@ class HomeScreen extends Component {
 
   componentWillUnmount() {
     const eventEmitter = this.props.eventEmitter;
-    eventEmitter.removeListener(EVENT_LOADING_TOPICS_SUCCESS);
-    eventEmitter.removeListener(EVENT_LOADING_TOPICS_FAIL);
+    eventEmitter.removeListener(EVENT_LOADING_TOPICS_SUCCESS, this.onLoadingSuccess);
+    eventEmitter.removeListener(EVENT_LOADING_TOPICS_FAIL, this.onLoadingFail);
   }
 
   initEventEmitter() {
     const eventEmitter = this.props.eventEmitter;
-    eventEmitter.on(EVENT_LOADING_TOPICS_SUCCESS, () => {
-
-    });
-    eventEmitter.on(EVENT_LOADING_TOPICS_FAIL, () => {
-
-    });
+    eventEmitter.on(EVENT_LOADING_TOPICS_SUCCESS, this.onLoadingSuccess);
+    eventEmitter.on(EVENT_LOADING_TOPICS_FAIL, this.onLoadingFail);
   }
+
+  onLoadingSuccess() {}
+
+  onLoadingFail() {}
 
   async initTopics() {
     const { fetchTopics, fetchCachedTopics } = this.props.store;
