@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { observer } from 'mobx-react/native';
 import EventEmitter from 'eventemitter3';
-import Store from '../store';
+import HomeStore from '../store/home';
 import TopicItem from '../components/topic-item';
 import {
   EVENT_LOADING_TOPICS_SUCCESS,
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
 });
 
 const ee = new EventEmitter();
-const store = new Store(ee);
+const store = new HomeStore(ee);
 
 export default class extends Component {
   static navigationOptions = {

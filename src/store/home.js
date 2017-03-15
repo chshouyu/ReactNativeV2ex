@@ -8,12 +8,12 @@ import {
   intercept,
   toJS
 } from 'mobx';
-import { fetchTopics } from './fetch';
+import { fetchTopics } from '../fetch';
 import {
   EVENT_LOADING_TOPICS_SUCCESS,
   EVENT_LOADING_TOPICS_FAIL,
   CACHED_TOPICS_KEY
-} from './constant';
+} from '../constant';
 
 export default class Store {
 
