@@ -4,6 +4,6 @@ import {
 } from './constant';
 
 export async function fetchTopics() {
-  const res = await axios(REQUEST_LATEST_URL, { timeout: 1000 });
+  const res = await axios(REQUEST_LATEST_URL, { timeout: 3000 });
   return res.data;
 }
