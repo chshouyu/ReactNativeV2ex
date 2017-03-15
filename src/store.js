@@ -33,7 +33,7 @@ export default class Store {
       try {
         await AsyncStorage.setItem(CACHED_TOPICS_KEY, JSON.stringify(jsTopics));
       } catch (e) {}
-    }, { delay: 100 });
+    }, { delay: 5000 });
 
     intercept(this, 'topics', change => {
       if (!change.newValue) {
