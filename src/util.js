@@ -9,9 +9,7 @@ export function blueLog(message) {
 
 export function delay(time = 400) {
   return new Promise(resolve => {
-    setTimeout(() => {
-      resolve();
-    }, time);
+    setTimeout(resolve, time);
   });
 }
 
