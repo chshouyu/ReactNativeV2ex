@@ -1,25 +1,21 @@
-import React, { Component } from 'react';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import Home from './screen/home';
 import Topic from './screen/topic';
 
-const HomeTabNavigator = StackNavigator({
-  Home: { screen: Home },
-  Topic: { screen: Topic }
+const HomeTab = TabNavigator({
+  Home: { screen: Home }
+}, {
+  swipeEnabled: true,
+  lazyLoad: true,
+  tabBarOptions: {
+    activeTintColor: '#505050',
+    labelStyle: {
+      fontSize: 12
+    }
+  }
 });
 
-class HomeTab extends Component {
-  static navigationOptions = {
-    title: 'V2EX'
-  }
-
-  render() {
-    return (
-      <HomeTabNavigator />
-    );
-  }
-}
-
-export default TabNavigator({
-  HomeTab: { screen: HomeTab }
+export default StackNavigator({
+  Home: { screen: HomeTab },
+  Topic: { screen: Topic }
 });

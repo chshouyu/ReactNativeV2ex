@@ -102,6 +102,11 @@ const styles = StyleSheet.create({
   separator: {
     backgroundColor: 'rgb(226, 226, 226)',
     height: 1 / PixelRatio.get()
+  },
+  tabIcon: {
+    width: 22,
+    height: 22,
+    borderRadius: 4
   }
 });
 
@@ -110,7 +115,14 @@ const store = new Store(ee);
 
 export default class extends Component {
   static navigationOptions = {
-    title: 'V2EX'
+    title: 'V2EX',
+    tabBar: {
+      icon: ({ tintColor }) => {
+        return (
+          <View style={[styles.tabIcon, {backgroundColor: tintColor}]}></View>
+        );
+      }
+    }
   }
 
   render() {
