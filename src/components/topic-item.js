@@ -18,7 +18,7 @@ export default class TopicItem extends Component {
           style={styles.thumbnail}
         />
         <View style={styles.itemDetail}>
-          <Text style={styles.title}>{rowData.title}</Text>
+          <Text numberOfLines={2} style={styles.title}>{rowData.title}</Text>
           <View style={styles.info}>
             {showNode && (
               <View style={styles.nodeWrapper}>
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
   },
   item: {
@@ -56,20 +56,19 @@ const styles = StyleSheet.create({
     height: 60
   },
   itemDetail: {
-    flex: 1,
+    width: 0,
+    flexGrow: 1,
     height: 60,
     marginLeft: 10
   },
   title: {
     lineHeight: 16,
     height: 32,
-    overflow: 'hidden',
     color: '#778087'
   },
   info: {
     marginTop: 12,
-    flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   nodeWrapper: {
     backgroundColor: 'rgb(226, 226, 226)',
