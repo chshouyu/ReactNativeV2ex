@@ -8,13 +8,13 @@ import {
   TouchableHighlight,
   PixelRatio
 } from 'react-native';
+import { observer } from 'mobx-react/native';
+import RepliesStore from '../store/replies';
 import { formatTime } from '../util';
+import Replies from '../components/replies';
 
-export default class extends Component {
-  static navigationOptions = {
-    title: '话题'
-  }
-
+@observer
+class TopicScreen extends Component {
   render() {
     const { state: { params: { rowData } } } = this.props.navigation;
     return (
@@ -38,6 +38,7 @@ export default class extends Component {
         <View style={styles.contentWrapper}>
           <Text style={styles.content}>{rowData.content}</Text>
         </View>
+        <Replies store={this.props.store} topicId={rowData.id} />
       </ScrollView>
     );
   }
@@ -102,3 +103,17 @@ const styles = StyleSheet.create({
     lineHeight: 22,
   }
 });
+
+const store = new RepliesStore();
+
+export default class extends Component {
+  static navigationOptions = {
+    title: '话题'
+  }
+
+  render() {
+    return (
+      <TopicScreen store={store} {...this.props} />
+    );
+  }
+}
