@@ -83,7 +83,8 @@ const styles = StyleSheet.create({
     height: 1 / PixelRatio.get()
   },
   noReply: {
-    marginTop: 20
+    marginTop: 20,
+    marginBottom: 30
   },
   noReplyText: {
     color: '#BFBFBF',
