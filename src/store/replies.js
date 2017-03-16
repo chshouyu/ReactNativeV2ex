@@ -13,15 +13,25 @@ export default class Store {
   initDS = this.ds.cloneWithRows(this.replies.slice());
 
   @observable replies = [];
+  @observable refreshing = false;
 
   @action.bound
   async fetchReplies(topicId) {
+    this.refreshing = true;
     try {
       const replies = await fetchReplies(topicId);
       runInAction(() => {
+        this.refreshing = false;
         this.replies = replies;
       });
-    } catch (e) {}
+    } catch (e) {
+      this.refreshing = false;
+    }
+  }
+
+  @action.bound
+  async clearReplies() {
+    this.replies = [];
   }
 
   @computed get dataSource() {
