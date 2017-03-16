@@ -31,10 +31,12 @@ export default class Store {
     AppState.addEventListener('change', this.appStateChange.bind(this));
 
     reaction(() => toJS(this.topics), async (jsTopics) => {
-      try {
-        await AsyncStorage.setItem(CACHED_TOPICS_KEY, JSON.stringify(jsTopics));
-      } catch (e) {}
-    }, { delay: 5000 });
+      if (this.loadingStatus === 'success') {
+        try {
+          await AsyncStorage.setItem(CACHED_TOPICS_KEY, JSON.stringify(jsTopics));
+        } catch (e) {}
+      }
+    }, { delay: 1000 });
 
     intercept(this, 'topics', change => {
       if (!change.newValue) {
@@ -49,7 +51,7 @@ export default class Store {
         return change;
       }
 
-      throw new Error('fetch topics error');
+      throw new Error('topics format error');
     });
   }
 
@@ -70,8 +72,8 @@ export default class Store {
     try {
       const topics = await fetchTopics();
       runInAction(() => {
-        this.refreshing = false;
         this.topics = topics;
+        this.refreshing = false;
         this.loadingStatus = 'success';
       });
     } catch (e) {
