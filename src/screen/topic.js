@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
   wrapper: {
     paddingLeft: 10,
     paddingRight: 10,
+    backgroundColor: '#EFEFF2'
   },
   titleContainer: {
     flexDirection: 'row',
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     paddingBottom: 10,
-    borderBottomColor: '#e2e2e2',
+    borderBottomColor: '#DCDCDC',
     borderBottomWidth: 1 / PixelRatio.get(),
   },
   titleWrapper: {

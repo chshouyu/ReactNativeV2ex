@@ -100,7 +100,7 @@ class HomeScreen extends Component {
 
 const styles = StyleSheet.create({
   separator: {
-    backgroundColor: 'rgb(226, 226, 226)',
+    backgroundColor: '#DCDCDC',
     height: 1 / PixelRatio.get()
   },
   tabIcon: {
