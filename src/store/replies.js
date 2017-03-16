@@ -3,7 +3,8 @@ import {
   observable,
   action,
   computed,
-  runInAction
+  runInAction,
+  intercept
 } from 'mobx';
 import { fetchReplies } from '../fetch';
 
@@ -15,14 +16,23 @@ export default class Store {
   @observable replies = [];
   @observable refreshing = false;
 
+  constructor() {
+    intercept(this, 'replies', change => {
+      if (Array.isArray(change.newValue)) {
+        return change;
+      }
+      throw new Error('replies format error');
+    });
+  }
+
   @action.bound
   async fetchReplies(topicId) {
     this.refreshing = true;
     try {
       const replies = await fetchReplies(topicId);
       runInAction(() => {
-        this.refreshing = false;
         this.replies = replies;
+        this.refreshing = false;
       });
     } catch (e) {
       this.refreshing = false;
