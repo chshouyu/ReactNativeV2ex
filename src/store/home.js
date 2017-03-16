@@ -24,6 +24,7 @@ export default class Store {
 
   @observable topics = [];
   @observable refreshing = false;
+  @observable loadingStatus = '';
 
   constructor(eventEmitter) {
     this.eventEmitter = eventEmitter;
@@ -41,18 +42,14 @@ export default class Store {
       }
 
       if (typeof change.newValue === 'string') {
-        try {
-          change.newValue = JSON.parse(change.newValue);
-        } catch (e) {
-          return null;
-        }
+        change.newValue = JSON.parse(change.newValue);
       }
 
       if (Array.isArray(change.newValue)) {
         return change;
       }
 
-      return null;
+      throw new Error('fetch topics error');
     });
   }
 
@@ -75,11 +72,13 @@ export default class Store {
       runInAction(() => {
         this.refreshing = false;
         this.topics = topics;
+        this.loadingStatus = 'success';
       });
-      this.eventEmitter.emit(EVENT_LOADING_TOPICS_SUCCESS);
     } catch (e) {
-      this.refreshing = false;
-      this.eventEmitter.emit(EVENT_LOADING_TOPICS_FAIL);
+      runInAction(() => {
+        this.refreshing = false;
+        this.loadingStatus = 'fail';
+      });
     }
   }
 

@@ -12,33 +12,13 @@ import { observer } from 'mobx-react/native';
 import EventEmitter from 'eventemitter3';
 import HomeStore from '../store/home';
 import TopicItem from '../components/topic-item';
-import {
-  EVENT_LOADING_TOPICS_SUCCESS,
-  EVENT_LOADING_TOPICS_FAIL
-} from '../constant';
+import Toast from '../components/toast';
 
 @observer
 class HomeScreen extends Component {
   componentDidMount() {
-    this.initEventEmitter();
     this.initTopics();
   }
-
-  componentWillUnmount() {
-    const eventEmitter = this.props.eventEmitter;
-    eventEmitter.removeListener(EVENT_LOADING_TOPICS_SUCCESS, this.onLoadingSuccess);
-    eventEmitter.removeListener(EVENT_LOADING_TOPICS_FAIL, this.onLoadingFail);
-  }
-
-  initEventEmitter() {
-    const eventEmitter = this.props.eventEmitter;
-    eventEmitter.on(EVENT_LOADING_TOPICS_SUCCESS, this.onLoadingSuccess);
-    eventEmitter.on(EVENT_LOADING_TOPICS_FAIL, this.onLoadingFail);
-  }
-
-  onLoadingSuccess() {}
-
-  onLoadingFail() {}
 
   async initTopics() {
     const { fetchTopics, fetchCachedTopics } = this.props.store;
@@ -79,26 +59,33 @@ class HomeScreen extends Component {
     const {
       dataSource,
       refreshing,
-      fetchTopics
+      fetchTopics,
+      loadingStatus
     } = this.props.store;
     return (
-      <ListView
-        initialListSize={20}
-        dataSource={dataSource}
-        renderRow={this.renderRow.bind(this)}
-        enableEmptySections={true}
-        renderSeparator={this.renderSeparator}
-        refreshControl={
-          <RefreshControl
-            title="加载中..."
-            onRefresh={fetchTopics}
-            refreshing={refreshing} />
-        } />
+      <View style={styles.container}>
+        <ListView
+          initialListSize={20}
+          dataSource={dataSource}
+          renderRow={this.renderRow.bind(this)}
+          enableEmptySections={true}
+          renderSeparator={this.renderSeparator}
+          refreshControl={
+            <RefreshControl
+              title="加载中..."
+              onRefresh={fetchTopics}
+              refreshing={refreshing} />
+          } />
+        <Toast type={loadingStatus} />
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
   separator: {
     backgroundColor: '#DCDCDC',
     height: 1 / PixelRatio.get()
