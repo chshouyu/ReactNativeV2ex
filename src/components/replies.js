@@ -7,6 +7,7 @@ import {
   PixelRatio
 } from 'react-native';
 import { observer } from 'mobx-react/native';
+import Reply from './reply';
 
 @observer
 export default class Replies extends Component {
@@ -30,9 +31,7 @@ export default class Replies extends Component {
 
   renderRow(rowData, sectionID, rowID, highlightRow) {
     return (
-      <View key={rowData.id}>
-        <Text>{rowData.content}</Text>
-      </View>
+      <Reply key={rowData.id} rowData={rowData} />
     );
   }
 
@@ -55,7 +54,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   separator: {
-    backgroundColor: 'rgb(226, 226, 226)',
+    backgroundColor: '#DCDCDC',
     height: 1 / PixelRatio.get()
   }
 });
