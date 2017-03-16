@@ -23,7 +23,8 @@ export default class Replies extends Component {
   render() {
     const {
       refreshing,
-      dataSource
+      dataSource,
+      hasReply
     } = this.props.store;
     return (
       <View style={styles.container}>
@@ -35,13 +36,20 @@ export default class Replies extends Component {
             />
           </View>
         }
-        <ListView
-          enableEmptySections={true}
-          dataSource={dataSource}
-          renderRow={this.renderRow.bind(this)}
-          renderSeparator={this.renderSeparator}
-          automaticallyAdjustContentInsets={false}
-        />
+        {!refreshing && !hasReply &&
+          <View style={styles.noReply}>
+            <Text style={styles.noReplyText}>暂无回复</Text>
+          </View>
+        }
+        {!refreshing && hasReply &&
+          <ListView
+            enableEmptySections={true}
+            dataSource={dataSource}
+            renderRow={this.renderRow.bind(this)}
+            renderSeparator={this.renderSeparator}
+            automaticallyAdjustContentInsets={false}
+          />
+        }
       </View>
     );
   }
@@ -73,5 +81,12 @@ const styles = StyleSheet.create({
   separator: {
     backgroundColor: '#DCDCDC',
     height: 1 / PixelRatio.get()
+  },
+  noReply: {
+    marginTop: 20
+  },
+  noReplyText: {
+    color: '#BFBFBF',
+    textAlign: 'center'
   }
 });

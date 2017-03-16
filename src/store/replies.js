@@ -34,6 +34,10 @@ export default class Store {
     this.replies = [];
   }
 
+  @computed get hasReply() {
+    return this.replies.length > 0;
+  }
+
   @computed get dataSource() {
     return this.initDS.cloneWithRows(this.replies.slice());
   }
