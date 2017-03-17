@@ -30,7 +30,7 @@ export default class Store {
     AppState.addEventListener('change', this.appStateChange.bind(this));
 
     reaction(() => toJS(this.topics), async (jsTopics) => {
-      if (this.source === 'online') {
+      if (this.source === 'online' && jsTopics.length > 0) {
         try {
           await AsyncStorage.setItem(CACHED_TOPICS_KEY, JSON.stringify(jsTopics));
           this.source = '';
