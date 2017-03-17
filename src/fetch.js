@@ -1,12 +1,20 @@
 import axios from 'axios';
 import {
   REQUEST_LATEST_URL,
-  REQUEST_TOPIC_REPLIES
+  REQUEST_TOPIC_REPLIES,
+  USER_AGENT
 } from './constant';
+import { topicsParser } from './parser';
 
 export async function fetchTopics() {
-  const res = await axios(REQUEST_LATEST_URL, { timeout: 3000 });
-  return res.data;
+  const res = await axios(REQUEST_LATEST_URL, {
+    timeout: 3000,
+    responseType: 'text',
+    headers: {
+      'User-Agent': USER_AGENT
+    }
+  });
+  return topicsParser(res.data);
 }
 
 export async function fetchReplies(topicId) {

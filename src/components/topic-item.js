@@ -14,7 +14,7 @@ export default class TopicItem extends Component {
     return (
       <View style={[styles.container, styles.item]}>
         <Image
-          source={{uri: `https:${rowData.member.avatar_large}`}}
+          source={{uri: `https:${rowData.member.avatar_normal}`}}
           style={styles.thumbnail}
         />
         <View style={styles.itemDetail}>

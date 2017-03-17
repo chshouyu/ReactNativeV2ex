@@ -25,18 +25,18 @@ class TopicScreen extends Component {
             <View style={styles.info}>
               <Text style={styles.username}>{rowData.member.username}</Text>
               <Text style={styles.dot}>·</Text>
-              <Text style={styles.datetime}>{formatTime(rowData.created)}</Text>
+              <Text style={styles.datetime}>none</Text>
             </View>
           </View>
           <TouchableHighlight style={styles.thumbnailWrapper} onPress={null}>
             <Image
-              source={{uri: `https:${rowData.member.avatar_large}`}}
+              source={{uri: `https:${rowData.member.avatar_normal}`}}
               style={styles.thumbnail}
             />
           </TouchableHighlight>
         </View>
         <View style={styles.contentWrapper}>
-          <Text style={styles.content}>{rowData.content}</Text>
+          <Text style={styles.content}>none...</Text>
         </View>
         <Replies store={this.props.store} topicId={rowData.id} />
       </ScrollView>
