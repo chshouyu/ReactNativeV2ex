@@ -1,6 +1,6 @@
 
 export function topicsParser(htmlText) {
-  const itemExp = /<div class=\"cell\s+item\"\s+style=\"\">\s*<table[\s\S]+?\/member\/([a-zA-Z0-9]+)[\s\S]+?src=\"([^"]+)\"[\s\S]+?\/t\/(\d+)[\s\S]+?>([^]+?)<\/a>[\s\S]+?\/go\/(\w+)\">([^>]+)<[\s\S]+?<\/strong>([^<]+)<strong[\s\S]+?\/member\/(\w+)[\s\S]+?>(\d+)<\/a[\s\S]+?<\/table>\s*?<\/div>/ig;
+  const itemExp = /<div class=\"cell\s+item\"\s+style=\"\">\s*<table[\s\S]+?\/member\/([a-zA-Z0-9]+)[\s\S]+?src=\"([^"]+)\"[\s\S]+?\/t\/(\d+)[\s\S]+?>([^]+?)<\/a>[\s\S]+?\/go\/(\w+)\">([^>]+)<[\s\S]+?<\/strong>([^<]+)<strong[\s\S]+?\/member\/([a-zA-Z0-9]+)[\s\S]+?count_livid\">(\d+)<\/a[\s\S]+?<\/table>\s*?<\/div>/ig;
   let r;
   let array = [];
   while (r = itemExp.exec(htmlText)) {
