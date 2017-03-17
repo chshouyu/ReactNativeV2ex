@@ -10,7 +10,8 @@ export default class Toast extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      show: false
+      show: false,
+      status: ''
     };
   }
 
@@ -18,15 +19,9 @@ export default class Toast extends Component {
     LayoutAnimation.spring();
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.type) {
-      this.showToast();
-    }
-  }
-
-  showToast() {
+  showToast(status) {
     LayoutAnimation.spring();
-    this.setState({show: true});
+    this.setState({show: true, status});
     setTimeout(() => {
       this.hideToast();
     }, 1200);
@@ -42,16 +37,16 @@ export default class Toast extends Component {
       success: '更新成功',
       fail: '更新失败'
     };
-    const type = this.props.type;
+    const status = this.state.status;
     return (
       <View style={styles.container}>
         <View
           style={[
             styles.toastTip,
-            styles[`${type}Background`],
+            styles[`${status}Background`],
             {top: this.state.show ? 0 : -30}
           ]}>
-          <Text style={styles[`${type}Color`]}>{tipTextMap[type]}</Text>
+          <Text style={styles[`${status}Color`]}>{tipTextMap[status]}</Text>
         </View>
       </View>
     );

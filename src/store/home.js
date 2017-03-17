@@ -10,8 +10,7 @@ import {
 } from 'mobx';
 import { fetchTopics } from '../fetch';
 import {
-  EVENT_LOADING_TOPICS_SUCCESS,
-  EVENT_LOADING_TOPICS_FAIL,
+  EVENT_LOADING_STATUS,
   CACHED_TOPICS_KEY
 } from '../constant';
 
@@ -21,19 +20,20 @@ export default class Store {
   ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id});
   initDS = this.ds.cloneWithRows(this.topics.slice());
   appState = AppState.currentState;
+  source = '';
 
   @observable topics = [];
   @observable refreshing = false;
-  @observable loadingStatus = '';
 
   constructor(eventEmitter) {
     this.eventEmitter = eventEmitter;
     AppState.addEventListener('change', this.appStateChange.bind(this));
 
     reaction(() => toJS(this.topics), async (jsTopics) => {
-      if (this.loadingStatus === 'success') {
+      if (this.source === 'online') {
         try {
           await AsyncStorage.setItem(CACHED_TOPICS_KEY, JSON.stringify(jsTopics));
+          this.source = '';
         } catch (e) {}
       }
     }, { delay: 1000 });
@@ -69,23 +69,25 @@ export default class Store {
   @action.bound
   async fetchTopics() {
     this.refreshing = true;
+    this.source = 'online';
     try {
       const topics = await fetchTopics();
       runInAction(() => {
         this.topics = topics;
         this.refreshing = false;
-        this.loadingStatus = 'success';
       });
+      this.eventEmitter.emit(EVENT_LOADING_STATUS, 'success');
     } catch (e) {
       runInAction(() => {
         this.refreshing = false;
-        this.loadingStatus = 'fail';
       });
+      this.eventEmitter.emit(EVENT_LOADING_STATUS, 'fail');
     }
   }
 
   @action.bound
   async fetchCachedTopics() {
+    this.source = 'cache';
     try {
       const jsTopics = await AsyncStorage.getItem(CACHED_TOPICS_KEY);
       runInAction(() => {

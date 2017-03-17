@@ -13,10 +13,14 @@ import EventEmitter from 'eventemitter3';
 import HomeStore from '../store/home';
 import TopicItem from '../components/topic-item';
 import Toast from '../components/toast';
+import { EVENT_LOADING_STATUS } from '../constant';
 
 @observer
 class HomeScreen extends Component {
   componentDidMount() {
+    this.props.eventEmitter.on(EVENT_LOADING_STATUS, (status) => {
+      this.toast.showToast(status);
+    });
     this.initTopics();
   }
 
@@ -59,8 +63,7 @@ class HomeScreen extends Component {
     const {
       dataSource,
       refreshing,
-      fetchTopics,
-      loadingStatus
+      fetchTopics
     } = this.props.store;
     return (
       <View style={styles.container}>
@@ -76,7 +79,7 @@ class HomeScreen extends Component {
               onRefresh={fetchTopics}
               refreshing={refreshing} />
           } />
-        <Toast type={loadingStatus} />
+        <Toast ref={(r) => this.toast = r} />
       </View>
     );
   }
