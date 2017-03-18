@@ -62,11 +62,6 @@ export default class Store {
     } catch (e) {}
   }
 
-  @action.bound
-  async clearReplies() {
-    this.replies = [];
-  }
-
   @computed get hasReply() {
     return this.replies.length > 0;
   }

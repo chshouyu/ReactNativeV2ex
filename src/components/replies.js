@@ -16,10 +16,6 @@ export default class Replies extends Component {
     this.props.store.fetchReplies(this.props.topicId);
   }
 
-  componentWillUnmount() {
-    this.props.store.clearReplies();
-  }
-
   render() {
     const {
       refreshing,
