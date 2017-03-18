@@ -9,7 +9,7 @@ import {
   PixelRatio
 } from 'react-native';
 import { observer } from 'mobx-react/native';
-import RepliesStore from '../store/replies';
+import TopicStore from '../store/topic';
 import { formatTime } from '../util';
 import Replies from '../components/replies';
 
@@ -105,8 +105,6 @@ const styles = StyleSheet.create({
   }
 });
 
-const store = new RepliesStore();
-
 export default class extends Component {
   static navigationOptions = {
     title: '话题'
@@ -114,7 +112,7 @@ export default class extends Component {
 
   render() {
     return (
-      <TopicScreen store={store} {...this.props} />
+      <TopicScreen store={new TopicStore()} {...this.props} />
     );
   }
 }
