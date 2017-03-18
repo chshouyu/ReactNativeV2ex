@@ -21,6 +21,7 @@ export default class Store {
   initDS = this.ds.cloneWithRows(this.topics.slice());
   appState = AppState.currentState;
   source = '';
+  MAX_CACHE_LENGTH = 10;
 
   @observable topics = [];
   @observable refreshing = false;
@@ -32,7 +33,7 @@ export default class Store {
     reaction(() => toJS(this.topics), async (jsTopics) => {
       if (this.source === 'online' && jsTopics.length > 0) {
         try {
-          await AsyncStorage.setItem(CACHED_TOPICS_KEY, JSON.stringify(jsTopics));
+          await AsyncStorage.setItem(CACHED_TOPICS_KEY, JSON.stringify(jsTopics.slice(0, this.MAX_CACHE_LENGTH)));
           this.source = '';
         } catch (e) {}
       }
