@@ -15,28 +15,34 @@ import Replies from '../components/replies';
 
 @observer
 class TopicScreen extends Component {
+  componentDidMount() {
+    const topicId = this.props.navigation.state.params.rowData.id;
+    this.props.store.fetchTopic(topicId);
+  }
+
   render() {
     const { state: { params: { rowData } } } = this.props.navigation;
+    const topic = this.props.store.topic;
     return (
       <ScrollView style={[styles.container, styles.wrapper]}>
         <View style={[styles.container, styles.titleContainer]}>
           <View style={styles.titleWrapper}>
-            <Text style={styles.title}>{rowData.title}</Text>
+            <Text style={styles.title}>{topic && topic.title}</Text>
             <View style={styles.info}>
-              <Text style={styles.username}>{rowData.member.username}</Text>
+              <Text style={styles.username}>{topic && topic.member.username}</Text>
               <Text style={styles.dot}>·</Text>
-              <Text style={styles.datetime}>none</Text>
+              <Text style={styles.datetime}>{topic && formatTime(topic.created)}</Text>
             </View>
           </View>
           <TouchableHighlight style={styles.thumbnailWrapper} onPress={null}>
             <Image
-              source={{uri: `https:${rowData.member.avatar_normal}`}}
+              source={{uri: `https:${topic && topic.member.avatar_large}`}}
               style={styles.thumbnail}
             />
           </TouchableHighlight>
         </View>
         <View style={styles.contentWrapper}>
-          <Text style={styles.content}>none...</Text>
+          <Text style={styles.content}>{topic && topic.content}</Text>
         </View>
         <Replies store={this.props.store} topicId={rowData.id} />
       </ScrollView>

@@ -6,13 +6,14 @@ import {
   runInAction,
   intercept
 } from 'mobx';
-import { fetchReplies } from '../fetch';
+import { fetchReplies, fetchTopic } from '../fetch';
 
 export default class Store {
 
   ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id});
   initDS = this.ds.cloneWithRows(this.replies.slice());
 
+  @observable topic = null;
   @observable replies = [];
   @observable refreshing = false;
 
@@ -22,6 +23,18 @@ export default class Store {
         return change;
       }
       throw new Error('replies format error');
+    });
+
+    intercept(this, 'topic', change => {
+      if (!change.newValue) {
+        return null;
+      }
+
+      if (typeof change.newValue === 'object') {
+        return change;
+      }
+
+      throw new Error('topic format error');
     });
   }
 
@@ -37,6 +50,16 @@ export default class Store {
     } catch (e) {
       this.refreshing = false;
     }
+  }
+
+  @action.bound
+  async fetchTopic(topicId) {
+    try {
+      const topic = await fetchTopic(topicId);
+      runInAction(() => {
+        this.topic = topic[0];
+      });
+    } catch (e) {}
   }
 
   @action.bound
