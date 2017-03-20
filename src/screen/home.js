@@ -37,7 +37,7 @@ class HomeScreen extends Component {
         underlayColor="#f1f1f1"
         onPress={() => {
           highlightRow(sectionID, rowID)
-          this.gotoTopic(rowData);
+          this.gotoTopic(rowData.id);
         }}>
         <View>
           <TopicItem showNode={true} rowData={rowData} />
@@ -46,9 +46,9 @@ class HomeScreen extends Component {
     );
   }
 
-  gotoTopic(rowData) {
+  gotoTopic(topicId) {
     const { navigate } = this.props.navigation;
-    navigate('Topic', { rowData });
+    navigate('Topic', { topicId });
   }
 
   renderSeparator(sectionID, rowID) {

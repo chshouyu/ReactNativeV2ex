@@ -16,12 +16,12 @@ import Replies from '../components/replies';
 @observer
 class TopicScreen extends Component {
   componentDidMount() {
-    const topicId = this.props.navigation.state.params.rowData.id;
+    const topicId = this.props.navigation.state.params.topicId;
     this.props.store.fetchTopic(topicId);
   }
 
   render() {
-    const { state: { params: { rowData } } } = this.props.navigation;
+    const { state: { params: { topicId } } } = this.props.navigation;
     const topic = this.props.store.topic;
     return (
       <ScrollView style={[styles.container, styles.wrapper]}>
@@ -44,7 +44,7 @@ class TopicScreen extends Component {
         <View style={styles.contentWrapper}>
           <Text style={styles.content}>{topic && topic.content}</Text>
         </View>
-        <Replies store={this.props.store} topicId={rowData.id} />
+        <Replies store={this.props.store} topicId={topicId} />
       </ScrollView>
     );
   }
