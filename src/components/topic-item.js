@@ -31,9 +31,11 @@ export default class TopicItem extends Component {
             <Text style={styles.username}>{rowData.member.username}</Text>
           </View>
         </View>
-        <View style={styles.repliesWrapper}>
-          <Text style={styles.replies}>{rowData.replies}</Text>
-        </View>
+        {rowData.replies > 0 &&
+          <View style={styles.repliesWrapper}>
+            <Text style={styles.replies}>{rowData.replies}</Text>
+          </View>
+        }
       </View>
     );
   }
