@@ -23,7 +23,6 @@ export async function fetchReplies(topicId) {
     timeout: 7000,
     params: {
       topic_id: topicId,
-      page_size: 100,
       _t: Date.now()
     }
   });
