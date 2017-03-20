@@ -15,7 +15,8 @@ export default class Store {
 
   @observable topic = null;
   @observable replies = [];
-  @observable refreshing = false;
+  @observable topicRefreshing = false;
+  @observable repliesRefreshing = false;
 
   constructor() {
     intercept(this, 'replies', change => {
@@ -40,7 +41,7 @@ export default class Store {
 
   @action.bound
   async fetchReplies(topicId) {
-    this.refreshing = true;
+    this.repliesRefreshing = true;
     try {
       const replies = await fetchReplies(topicId);
       runInAction(() => {
@@ -49,21 +50,25 @@ export default class Store {
           reply.is_author = this.topic ? this.topic.member.username === reply.member.username : false
           return reply;
         });
-        this.refreshing = false;
+        this.repliesRefreshing = false;
       });
     } catch (e) {
-      this.refreshing = false;
+      this.repliesRefreshing = false;
     }
   }
 
   @action.bound
   async fetchTopic(topicId) {
+    this.topicRefreshing = true;
     try {
       const topic = await fetchTopic(topicId);
       runInAction(() => {
         this.topic = topic[0];
+        this.topicRefreshing = false;
       });
-    } catch (e) {}
+    } catch (e) {
+      this.topicRefreshing = false;
+    }
   }
 
   @computed get hasReply() {

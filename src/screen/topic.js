@@ -6,7 +6,8 @@ import {
   Image,
   ScrollView,
   TouchableHighlight,
-  PixelRatio
+  PixelRatio,
+  ActivityIndicator
 } from 'react-native';
 import { observer } from 'mobx-react/native';
 import TopicStore from '../store/topic';
@@ -27,28 +28,40 @@ class TopicScreen extends Component {
   }
 
   render() {
-    const { topic } = this.props.store;
+    const { topic, topicRefreshing } = this.props.store;
     return (
       <ScrollView style={[styles.container, styles.wrapper]}>
-        <View style={[styles.container, styles.titleContainer]}>
-          <View style={styles.titleWrapper}>
-            <Text style={styles.title}>{topic && topic.title}</Text>
-            <View style={styles.info}>
-              <Text style={styles.username}>{topic && topic.member.username}</Text>
-              <Text style={styles.dot}>·</Text>
-              <Text style={styles.datetime}>{topic && formatTime(topic.created)}</Text>
+        {topicRefreshing &&
+          <View style={styles.loading}>
+            <ActivityIndicator
+              animating={topicRefreshing}
+              size="large"
+            />
+          </View>
+        }
+        {!topicRefreshing &&
+          <View>
+            <View style={[styles.container, styles.titleContainer]}>
+              <View style={styles.titleWrapper}>
+                <Text style={styles.title}>{topic && topic.title}</Text>
+                <View style={styles.info}>
+                  <Text style={styles.username}>{topic && topic.member.username}</Text>
+                  <Text style={styles.dot}>·</Text>
+                  <Text style={styles.datetime}>{topic && formatTime(topic.created)}</Text>
+                </View>
+              </View>
+              <TouchableHighlight style={styles.thumbnailWrapper} onPress={null}>
+                <Image
+                  source={{uri: `https:${topic && topic.member.avatar_large}`}}
+                  style={styles.thumbnail}
+                />
+              </TouchableHighlight>
+            </View>
+            <View style={styles.contentWrapper}>
+              <Text style={styles.content}>{topic && topic.content}</Text>
             </View>
           </View>
-          <TouchableHighlight style={styles.thumbnailWrapper} onPress={null}>
-            <Image
-              source={{uri: `https:${topic && topic.member.avatar_large}`}}
-              style={styles.thumbnail}
-            />
-          </TouchableHighlight>
-        </View>
-        <View style={styles.contentWrapper}>
-          <Text style={styles.content}>{topic && topic.content}</Text>
-        </View>
+        }
         <Replies store={this.props.store} />
       </ScrollView>
     );
@@ -63,6 +76,12 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     backgroundColor: '#EFEFF2'
+  },
+  loading: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 40
   },
   titleContainer: {
     flexDirection: 'row',

@@ -14,26 +14,26 @@ import Reply from './reply';
 export default class Replies extends Component {
   render() {
     const {
-      refreshing,
+      repliesRefreshing,
       dataSource,
       hasReply
     } = this.props.store;
     return (
       <View style={styles.container}>
-        {refreshing &&
+        {repliesRefreshing &&
           <View style={styles.loading}>
             <ActivityIndicator
-              animating={refreshing}
+              animating={repliesRefreshing}
               size="small"
             />
           </View>
         }
-        {!refreshing && !hasReply &&
+        {!repliesRefreshing && !hasReply &&
           <View style={styles.noReply}>
             <Text style={styles.noReplyText}>暂无回复</Text>
           </View>
         }
-        {!refreshing && hasReply &&
+        {!repliesRefreshing && hasReply &&
           <ListView
             enableEmptySections={true}
             dataSource={dataSource}
