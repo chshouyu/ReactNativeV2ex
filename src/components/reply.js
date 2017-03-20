@@ -11,7 +11,7 @@ import { formatTime } from '../util';
 @observer
 export default class Reply extends Component {
   render() {
-    const rowData = this.props.rowData;
+    const { rowData, index} = this.props;
     return (
       <View style={[styles.container, styles.item]}>
         <Image
@@ -19,11 +19,14 @@ export default class Reply extends Component {
           style={styles.thumbnail}
         />
         <View style={styles.itemDetail}>
-          <Text>
-            <Text style={styles.username}>{rowData.member.username}</Text>
-            {'  '}
-            <Text style={styles.datetime}>{formatTime(rowData.last_modified)}</Text>
-          </Text>
+          <View style={styles.header}>
+            <View style={styles.headerLeft}>
+              <Text style={styles.username}>{rowData.member.username}</Text>
+              <Text>{' '}</Text>
+              <Text style={styles.datetime}>{formatTime(rowData.last_modified)}</Text>
+            </View>
+            <Text style={styles.floor}>{index + 1}</Text>
+          </View>
           <View style={styles.contentWrapper}>
             <Text style={styles.content}>{rowData.content}</Text>
           </View>
@@ -49,6 +52,21 @@ const styles = StyleSheet.create({
   itemDetail: {
     flex: 1,
     marginLeft: 10
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  headerLeft: {
+    flexDirection: 'row'
+  },
+  floor: {
+    width: 22,
+    textAlign: 'center',
+    color: '#B6B6B6',
+    fontWeight: '700',
+    fontSize: 10
   },
   username: {
     fontSize: 12,

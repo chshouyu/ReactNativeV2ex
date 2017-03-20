@@ -52,7 +52,7 @@ export default class Replies extends Component {
 
   renderRow(rowData, sectionID, rowID, highlightRow) {
     return (
-      <Reply key={rowData.id} rowData={rowData} />
+      <Reply key={rowData.id} rowData={rowData} index={+rowID} />
     );
   }
 
