@@ -25,7 +25,7 @@ export default class Reply extends Component {
               <Text>{' '}</Text>
               <Text style={styles.datetime}>{formatTime(rowData.last_modified)}</Text>
             </View>
-            <Text style={styles.floor}>{rowData.floor}</Text>
+            <Text style={styles.floor}>{rowData.floor}'</Text>
           </View>
           <View style={styles.contentWrapper}>
             <Text style={styles.content}>{rowData.content}</Text>
@@ -65,8 +65,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   floor: {
-    width: 22,
-    textAlign: 'center',
     color: '#B6B6B6',
     fontWeight: '700',
     fontSize: 10
