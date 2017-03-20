@@ -23,8 +23,7 @@ export async function fetchReplies(topicId) {
     timeout: 7000,
     params: {
       topic_id: topicId,
-      page_size: 100,
-      _t: Date.now()
+      page_size: 100
     }
   });
   return res.data;
@@ -34,8 +33,7 @@ export async function fetchTopic(topicId) {
   const res = await axios(REQUEST_TOPIC, {
     timeout: 7000,
     params: {
-      id: topicId,
-      _t: Date.now()
+      id: topicId
     }
   });
   return res.data;
