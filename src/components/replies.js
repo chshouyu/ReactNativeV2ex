@@ -12,10 +12,6 @@ import Reply from './reply';
 
 @observer
 export default class Replies extends Component {
-  componentDidMount() {
-    this.props.store.fetchReplies(this.props.topicId);
-  }
-
   render() {
     const {
       refreshing,
@@ -52,7 +48,9 @@ export default class Replies extends Component {
 
   renderRow(rowData, sectionID, rowID, highlightRow) {
     return (
-      <Reply key={rowData.id} rowData={rowData} index={+rowID} />
+      <Reply
+        key={rowData.id}
+        rowData={rowData} />
     );
   }
 

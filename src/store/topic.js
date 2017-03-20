@@ -44,7 +44,11 @@ export default class Store {
     try {
       const replies = await fetchReplies(topicId);
       runInAction(() => {
-        this.replies = replies;
+        this.replies = replies.map((reply, index) => {
+          reply.floor = index + 1;
+          reply.is_author = this.topic ? this.topic.member.username === reply.member.username : false
+          return reply;
+        });
         this.refreshing = false;
       });
     } catch (e) {
