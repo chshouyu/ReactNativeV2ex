@@ -30,7 +30,7 @@ class TopicScreen extends Component {
   render() {
     const { topic, topicRefreshing } = this.props.store;
     return (
-      <ScrollView style={[styles.container, styles.wrapper]}>
+      <ScrollView showsVerticalScrollIndicator={false} style={[styles.container, styles.wrapper]}>
         {topicRefreshing &&
           <View style={styles.loading}>
             <ActivityIndicator
