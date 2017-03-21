@@ -13,7 +13,7 @@ export default class Reply extends Component {
   render() {
     const { rowData } = this.props;
     return (
-      <View style={[styles.container, styles.item, rowData.is_author ? styles.authorReplay : null]}>
+      <View style={[styles.container, styles.item]}>
         <Image
           source={{uri: `https:${rowData.member.avatar_normal}`}}
           style={styles.thumbnail}
@@ -25,7 +25,7 @@ export default class Reply extends Component {
               <Text>{' '}</Text>
               <Text style={styles.datetime}>{formatTime(rowData.last_modified)}</Text>
             </View>
-            <Text style={styles.floor}>{rowData.floor}'</Text>
+            <Text style={[styles.floor, rowData.is_author ? styles.authorFloor : null]}>{rowData.floor}'</Text>
           </View>
           <View style={styles.contentWrapper}>
             <Text style={styles.content}>{rowData.content}</Text>
@@ -45,8 +45,8 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10
   },
-  authorReplay: {
-
+  authorFloor: {
+    color: '#000'
   },
   thumbnail: {
     width: 30,
