@@ -68,7 +68,7 @@ class HomeScreen extends Component {
     return (
       <View style={styles.container}>
         <ListView
-          initialListSize={20}
+          initialListSize={10}
           dataSource={dataSource}
           renderRow={this.renderRow.bind(this)}
           enableEmptySections={true}

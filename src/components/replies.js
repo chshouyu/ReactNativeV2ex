@@ -35,6 +35,7 @@ export default class Replies extends Component {
         }
         {!repliesRefreshing && hasReply &&
           <ListView
+            initialListSize={10}
             enableEmptySections={true}
             dataSource={dataSource}
             renderRow={this.renderRow.bind(this)}
