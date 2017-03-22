@@ -65,12 +65,12 @@ const styles = StyleSheet.create({
     marginLeft: 10
   },
   title: {
-    lineHeight: 16,
-    height: 32,
+    lineHeight: 18,
+    height: 36,
     color: '#778087'
   },
   info: {
-    marginTop: 12,
+    marginTop: 8,
     flexDirection: 'row'
   },
   nodeWrapper: {
